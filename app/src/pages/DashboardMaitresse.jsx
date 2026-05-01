@@ -337,9 +337,9 @@ export default function DashboardMaitresse() {
                         <div key={p.id} className="bg-white rounded-[2.5rem] card-shadow p-7 border border-slate-50 group hover:border-brand-200 transition-all hover:shadow-xl">
                           <div className="flex items-start justify-between mb-6">
                             <div className="flex items-center gap-4">
-                              <div className={`w-16 h-16 rounded-3xl flex items-center justify-center text-4xl shadow-inner ${p.avatarColor || 'bg-slate-100'}`}>
+                              <div className={`w-20 h-20 rounded-[2rem] flex items-center justify-center text-5xl shadow-inner ${p.avatarColor || 'bg-slate-100'}`}>
                                 {p.avatar && (p.avatar.includes('http') || p.avatar.includes('assets')) ? (
-                                   <img src={p.avatar} alt="" className="w-12 h-12 object-contain" />
+                                   <img src={p.avatar} alt="" className="w-16 h-16 object-contain" />
                                 ) : (
                                   CHILD_AVATARS.find(a => a.img === p.avatar)?.emoji || '👤'
                                 )}
@@ -504,7 +504,7 @@ export default function DashboardMaitresse() {
                               </td>
                               <td className="p-6 text-center"><ResourceStatus url={m.audio} type="audio" /></td>
                               <td className="p-6 text-center"><ResourceStatus url={m.image} type="image" /></td>
-                              <td className="p-6 text-[10px] text-slate-300 font-mono group-hover:text-slate-500 transition-colors truncate max-w-[150px]">{m.image}</td>
+                              <td className="p-6 text-[10px] text-slate-300 font-mono group-hover:text-slate-500 transition-colors break-all max-w-[250px]">{m.image}</td>
                             </tr>
                           ))}
                         </React.Fragment>
