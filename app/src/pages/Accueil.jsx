@@ -150,9 +150,17 @@ export default function Accueil() {
                       : 'border-slate-200 hover:border-brand-300 hover:shadow-md bg-white'
                   }`}
               >
-                <div className={`h-12 w-12 rounded-xl flex items-center justify-center overflow-hidden group-hover:scale-110 transition-transform ${p.avatarColor || 'bg-brand-50 text-brand-600'}`}>
-                  {p.avatar?.startsWith('/') ? (
-                    <img src={p.avatar} alt={p.prenom} className="w-full h-full object-cover" />
+                <div className="h-12 w-12 rounded-xl flex items-center justify-center overflow-hidden group-hover:scale-110 transition-transform ${p.avatarColor || 'bg-brand-50 text-brand-600'}">
+                  {p.avatar?.startsWith('/') || p.avatar?.startsWith('http') || p.avatar?.startsWith(process.env.PUBLIC_URL || '') ? (
+                    <img 
+                      src={p.avatar} 
+                      alt={p.prenom}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.parentElement.innerHTML = '<span class="text-2xl">🧒</span>';
+                      }}
+                      className="w-full h-full object-contain" 
+                    />
                   ) : (
                     <span className="text-2xl">{p.avatar}</span>
                   )}
@@ -256,7 +264,15 @@ export default function Accueil() {
                     >
                       <div className="h-10 w-10 flex items-center justify-center">
                         {a.img ? (
-                          <img src={a.img} alt={a.name} className="w-full h-full object-contain" />
+                          <img 
+                            src={a.img} 
+                            alt={a.name}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.style.display = 'none';
+                            }}
+                            className="w-full h-full object-contain" 
+                          />
                         ) : (
                           <span className="text-2xl">{a.emoji}</span>
                         )}

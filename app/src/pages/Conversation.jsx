@@ -7,6 +7,7 @@ import { ArrowLeft, Volume2, MessageCircle, CheckCircle2 } from 'lucide-react'
 import ConfettiOverlay from '../components/ui/ConfettiOverlay'
 import { playSuccess, playError, playVictory } from '../utils/soundEffects'
 import { AuditingMetrics, calculateDifficulty, estimateConfidence } from '../utils/auditingMetrics'
+import PremiumAudioPlayer from '../components/ui/PremiumAudioPlayer'
 
 export default function Conversation() {
   const activeProfile = useProfileStore(s => s.getActiveProfile())
@@ -111,11 +112,14 @@ export default function Conversation() {
     }
   }
 
-  const playAudio = () => {
-    if (round.questionAudio) {
-      const audio = new Audio(round.questionAudio)
-      audio.play().catch(e => console.log('Audio error:', e))
+const nextScenario = () => {
+    if (currentScenario + 1 < conversations.length) {
+      setCurrentScenario(s => s + 1)
+      setCurrentRound(0)
+      setSelectedOption(null)
+      setIsCompleted(false)
     }
+  }
   }
 
   return (
@@ -157,12 +161,16 @@ export default function Conversation() {
                 <div className="flex-1">
                   <div className="bg-brand-50 text-brand-700 p-5 rounded-2xl rounded-tl-none border border-brand-100 relative">
                     <p className="font-arabic text-2xl mb-2" dir="rtl">{round.question}</p>
-                    <button 
-                      onClick={playAudio}
-                      className="flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 transition-colors"
-                    >
-                      <Volume2 className="h-4 w-4" /> إستمع
-                    </button>
+                    <div className="flex items-center gap-3">
+                      {round.questionAudio && (
+                        <PremiumAudioPlayer 
+                          url={round.questionAudio} 
+                          size="md"
+                          fallbackText={round.question}
+                        />
+                      )}
+                      <span className="text-xs text-slate-400 font-medium">إستمع</span>
+                    </div>
                     {/* Speech bubble tail */}
                     <div className="absolute top-0 -left-2 w-0 h-0 border-t-[10px] border-t-brand-50 border-l-[10px] border-l-transparent" />
                   </div>

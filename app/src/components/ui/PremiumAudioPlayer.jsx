@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Volume2, Loader2, AlertCircle, Play } from 'lucide-react'
 import { useRobustAudio } from '../../hooks/useRobustAudio'
 
@@ -7,8 +7,19 @@ import { useRobustAudio } from '../../hooks/useRobustAudio'
  * Inspiré par les recommandations de bonnes pratiques pédagogiques.
  */
 export default function PremiumAudioPlayer({ url, fallbackText, size = 'md', className = '' }) {
-  const { status, play } = useRobustAudio(url, fallbackText)
+  const [fullUrl, setFullUrl] = useState(url)
+  const { status, play, stop } = useRobustAudio(fullUrl, fallbackText)
 
+  useEffect(() => {
+    // Préfixe avec l'URL publique si c'est un chemin relatif
+    if (url && !url.startsWith('http') && !url.startsWith('blob:')) {
+      const base = process.env.PUBLIC_URL || ''
+      setFullUrl(`${base}${url.startsWith('/') ? '' : '/'}${url}`)
+    } else {
+      setFullUrl(url)
+    }
+  }, [url])
+  
   const sizes = {
     sm: 'h-10 w-10 p-2',
     md: 'h-16 w-16 p-4',
@@ -22,6 +33,7 @@ export default function PremiumAudioPlayer({ url, fallbackText, size = 'md', cla
     lg: 32,
     xl: 48
   }
+
 
   const getStatusConfig = () => {
     switch (status) {
