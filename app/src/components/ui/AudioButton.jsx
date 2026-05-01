@@ -4,11 +4,17 @@ import { playAudio } from '../../utils/audioPlayer'
 
 export default function AudioButton({ audioPath, speakText = '', size = 'md', label, className = '' }) {
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(false)
 
   const handlePlay = () => {
+    if (isDisabled) return
     setIsPlaying(true)
+    setIsDisabled(true)
     playAudio(audioPath, speakText)
-    setTimeout(() => setIsPlaying(false), 1500)
+    setTimeout(() => {
+      setIsPlaying(false)
+      setIsDisabled(false)
+    }, 2000)
   }
 
   const sizes = {
