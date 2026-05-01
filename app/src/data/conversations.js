@@ -9,16 +9,16 @@ export const conversations = [
         question: 'السَّلَامُ عَلَيْكُمْ!',
         questionAudio: 'resources/audio/conversations/salut_1.mp3',
         options: [
-          { text: 'وَعَلَيْكُمُ السَّلَام', correct: true, feedback: 'برافو!' },
-          { text: 'شُكْرًا', correct: false, feedback: 'لا، قل: وعليكم السلام' },
+          { text: 'وَعَلَيْكُمُ السَّلَام', correct: true },
+          { text: 'شُكْرًا', correct: false },
         ]
       },
       {
-        question: 'كَيْفَ حَالُكَ؟',
-        questionAudio: 'resources/audio/conversations/salut_2.mp3',
+        question: 'صَبَاحُ الخَيْر!',
+        questionAudio: 'resources/audio/conversations/matin_1.mp3',
         options: [
-          { text: 'بِخَيْر، الحَمْدُ لِله', correct: true },
-          { text: 'اِسْمِي مُحَمَّد', correct: false },
+          { text: 'صَبَاحُ النُّور', correct: true },
+          { text: 'مَسَاءُ الخَيْر', correct: false },
         ]
       }
     ]
@@ -43,6 +43,54 @@ export const conversations = [
         options: [
           { text: 'عُمْرِي 7 سَنَوَات', correct: true },
           { text: 'لَا شُكْرًا', correct: false },
+        ]
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: 'Les Émotions',
+    titleAr: 'المَشَاعِر',
+    emoji: '😊',
+    rounds: [
+      {
+        question: 'كَيْفَ حَالُكَ اليَوْم؟',
+        questionAudio: 'resources/audio/conversations/mood_1.mp3',
+        options: [
+          { text: 'أَنَا سَعِيد', correct: true },
+          { text: 'أَنَا كِتَاب', correct: false },
+        ]
+      },
+      {
+        question: 'هَلْ أَنْتَ بِخَيْر؟',
+        questionAudio: 'resources/audio/conversations/mood_2.mp3',
+        options: [
+          { text: 'نَعَمْ، الحَمْدُ لِله', correct: true },
+          { text: 'لَا، أَنَا أَزْرَق', correct: false },
+        ]
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: 'Dans la classe',
+    titleAr: 'فِي الفَصْل',
+    emoji: '🏫',
+    rounds: [
+      {
+        question: 'اِسْتَمِعْ إِلَى الحِوَار!',
+        questionAudio: 'resources/audio/conversations/classe_1.mp3',
+        options: [
+          { text: 'حَسَنًا', correct: true },
+          { text: 'قِفْ', correct: false },
+        ]
+      },
+      {
+        question: 'أَيْنَ الكِتَاب؟',
+        questionAudio: 'resources/audio/conversations/classe_2.mp3',
+        options: [
+          { text: 'هَذَا هُوَ الكِتَاب', correct: true },
+          { text: 'أَنَا يَاسِين', correct: false },
         ]
       }
     ]

@@ -7,6 +7,7 @@ import { ArrowLeft, Lock, Download, Trash2, Star, BarChart3, Volume2, Play } fro
 import { categories } from '../data/vocabulaire'
 import { alphabet } from '../data/alphabet'
 import { phonemes } from '../data/phonemes'
+import { conversations } from '../data/conversations'
 
 const DEFAULT_PIN = '2026'
 const PIN_STORAGE_KEY = 'hurufi-teacher-pin'
@@ -209,6 +210,32 @@ export default function DashboardMaitresse() {
                   <span className="font-arabic text-lg">{p.lettre1.caractere} / {p.lettre2.caractere}</span>
                   <Play className={`h-4 w-4 ${playingId === `phoneme-${p.id}` ? 'text-emerald-600' : 'text-slate-300'}`} />
                 </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Conversations Audio */}
+          <div className="bg-white rounded-3xl card-shadow p-6">
+            <h3 className="font-bold text-slate-800 mb-4 border-b pb-2">المحادثة (الحوار)</h3>
+            <div className="space-y-4">
+              {conversations.map(conv => (
+                <div key={conv.id} className="border-b border-slate-50 pb-3 last:border-0">
+                  <h4 className="font-bold text-sm text-slate-600 mb-2 flex items-center gap-2">
+                    <span>{conv.emoji}</span> {conv.title}
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {conv.rounds.map((r, idx) => (
+                      <button 
+                        key={idx}
+                        onClick={() => playPreview(r.questionAudio, `conv-${conv.id}-${idx}`)}
+                        className={`p-3 rounded-xl border flex items-center justify-between transition-all ${playingId === `conv-${conv.id}-${idx}` ? 'bg-sky-50 border-sky-300' : 'bg-white hover:border-slate-300'}`}
+                      >
+                        <span className="font-arabic text-sm text-right" dir="rtl">{r.question}</span>
+                        <Play className={`h-4 w-4 flex-shrink-0 ${playingId === `conv-${conv.id}-${idx}` ? 'text-sky-600' : 'text-slate-300'}`} />
+                      </button>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
