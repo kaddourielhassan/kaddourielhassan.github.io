@@ -40,7 +40,11 @@ export default function FlashcardsVocabulaire() {
               className="bg-white rounded-2xl card-shadow border border-slate-100 p-4 text-left hover:card-shadow-lg hover:border-brand-200 transition-all group"
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
             >
-              <span className="text-3xl block mb-2 group-hover:scale-110 transition-transform inline-block">{cat.emoji}</span>
+              <span className="text-3xl block mb-2 group-hover:scale-110 transition-transform inline-block">
+                {cat.id === 'nombres' ? (
+                  <span className="font-black text-brand-600 bg-brand-50 px-2 rounded-lg border border-brand-100">1 2 3</span>
+                ) : cat.emoji}
+              </span>
               <h3 className="font-arabic text-xl text-brand-700" dir="rtl">{cat.nomAr}</h3>
               <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{cat.nom}</p>
               <p className="text-[10px] text-slate-300 font-medium mt-1">{cat.mots.length} كلمات</p>
@@ -115,6 +119,15 @@ export default function FlashcardsVocabulaire() {
               e.currentTarget.src = fallbackImage
             }}
           />
+          {/* Digit display for numbers category */}
+          {selectedCat.id === 'nombres' && (
+            <div className="mb-4">
+              <span className="text-5xl font-black text-slate-200 bg-slate-50 px-6 py-2 rounded-2xl border-2 border-slate-100">
+                {mot.fr}
+              </span>
+            </div>
+          )}
+
           {/* Le mot Arabe est maintenant l'élément principal */}
           <p className="font-arabic text-6xl text-brand-700 mb-6" dir="rtl">{mot.ar}</p>
 

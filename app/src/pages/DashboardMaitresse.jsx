@@ -377,6 +377,28 @@ export default function DashboardMaitresse() {
                           <td className="p-6 text-[10px] text-slate-300 font-mono group-hover:text-slate-500 transition-colors">{l.audio}</td>
                         </tr>
                       ))}
+
+                      {categories.map(cat => (
+                        <React.Fragment key={cat.id}>
+                          <tr className="bg-slate-50/50">
+                            <td colSpan="4" className="p-4 font-black text-brand-700 text-xs uppercase tracking-widest px-8">{cat.emoji} {cat.nomAr}</td>
+                          </tr>
+                          {cat.mots.map((m, idx) => (
+                            <tr key={idx} className="hover:bg-slate-50/50 transition-colors group">
+                              <td className="p-6 px-8 flex items-center gap-3">
+                                {cat.id === 'nombres' && (
+                                  <span className="bg-slate-100 px-2 py-1 rounded text-xs font-black text-slate-400 border border-slate-200">{m.fr}</span>
+                                )}
+                                <span className="font-arabic font-black text-xl text-slate-800">{m.ar}</span> 
+                                <span className="text-[10px] text-slate-400 font-bold">({m.fr})</span>
+                              </td>
+                              <td className="p-6 text-center"><ResourceStatus url={m.audio} type="audio" /></td>
+                              <td className="p-6 text-center"><ResourceStatus url={m.image} type="image" /></td>
+                              <td className="p-6 text-[10px] text-slate-300 font-mono group-hover:text-slate-500 transition-colors truncate max-w-[150px]">{m.image}</td>
+                            </tr>
+                          ))}
+                        </React.Fragment>
+                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -411,14 +433,5 @@ export default function DashboardMaitresse() {
     </div>
   )
 }
-ton>
-                </div>
-              </div>
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </main>
-    </div>
-  )
-}
+
 
