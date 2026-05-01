@@ -14,6 +14,11 @@ function speakFallback(text) {
 
 export function playAudio(path, fallbackText = '') {
   try {
+    // Stop any current audio or speech
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel()
+    }
+
     if (currentAudio) {
       currentAudio.pause()
       currentAudio.currentTime = 0

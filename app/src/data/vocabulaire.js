@@ -4,14 +4,14 @@ const rawCategories = [
   {
     id: 'couleurs', nom: 'Les couleurs', nomAr: 'الأَلْوَان', emoji: '🎨',
     mots: [
-      { fr: 'Rouge', ar: 'أَحْمَر', translit: 'Aḥmar', audio: '/audio/vocabulaire/mot_01_ahmar.mp3' },
-      { fr: 'Bleu', ar: 'أَزْرَق', translit: 'Azraq', audio: '/audio/vocabulaire/mot_02_azraq.mp3' },
-      { fr: 'Vert', ar: 'أَخْضَر', translit: 'Akhḍar', audio: '/audio/vocabulaire/mot_03_akhdar.mp3' },
-      { fr: 'Jaune', ar: 'أَصْفَر', translit: 'Aṣfar', audio: '/audio/vocabulaire/mot_04_asfar.mp3' },
-      { fr: 'Blanc', ar: 'أَبْيَض', translit: 'Abyaḍ', audio: '/audio/vocabulaire/mot_05_abyad.mp3' },
-      { fr: 'Noir', ar: 'أَسْوَد', translit: 'Aswad', audio: '/audio/vocabulaire/mot_06_aswad.mp3' },
-      { fr: 'Orange', ar: 'بُرْتُقَالِي', translit: 'Burtuqālī', audio: '/audio/vocabulaire/mot_07_burtuqali.mp3' },
-      { fr: 'Rose', ar: 'وَرْدِي', translit: 'Wardī', audio: '/audio/vocabulaire/mot_08_wardi.mp3' },
+      { fr: 'Rouge', ar: 'أَحْمَر', translit: 'Aḥmar', audio: 'audio/vocabulaire/mot_01_ahmar.mp3' },
+      { fr: 'Bleu', ar: 'أَزْرَق', translit: 'Azraq', audio: 'audio/vocabulaire/mot_02_azraq.mp3' },
+      { fr: 'Vert', ar: 'أَخْضَر', translit: 'Akhḍar', audio: 'audio/vocabulaire/mot_03_akhdar.mp3' },
+      { fr: 'Jaune', ar: 'أَصْفَر', translit: 'Aṣfar', audio: 'audio/vocabulaire/mot_04_asfar.mp3' },
+      { fr: 'Blanc', ar: 'أَبْيَض', translit: 'Abyaḍ', audio: 'audio/vocabulaire/mot_05_abyad.mp3' },
+      { fr: 'Noir', ar: 'أَسْوَد', translit: 'Aswad', audio: 'audio/vocabulaire/mot_06_aswad.mp3' },
+      { fr: 'Orange', ar: 'بُرْتُقَالِي', translit: 'Burtuqālī', audio: 'audio/vocabulaire/mot_07_burtuqali.mp3' },
+      { fr: 'Rose', ar: 'وَرْدِي', translit: 'Wardī', audio: 'audio/vocabulaire/mot_08_wardi.mp3' },
     ]
   },
   {
@@ -40,10 +40,10 @@ const rawCategories = [
   {
     id: 'classe', nom: 'Objets de la classe', nomAr: 'أَدَوَاتُ الفَصْل', emoji: '📚',
     mots: [
-      { fr: 'Livre', ar: 'كِتَاب', translit: 'Kitāb', audio: '/audio/vocabulaire/mot_09_kitab.mp3' },
-      { fr: 'Crayon', ar: 'قَلَم', translit: 'Qalam', audio: '/audio/vocabulaire/mot_10_qalam.mp3' },
-      { fr: 'Table', ar: 'طَاوِلَة', translit: 'Ṭāwila', audio: '/audio/vocabulaire/mot_11_tawila.mp3' },
-      { fr: 'Chaise', ar: 'كُرْسِي', translit: 'Kursī', audio: '/audio/vocabulaire/mot_12_kursi.mp3' },
+      { fr: 'Livre', ar: 'كِتَاب', translit: 'Kitāb', audio: 'audio/vocabulaire/mot_09_kitab.mp3' },
+      { fr: 'Crayon', ar: 'قَلَم', translit: 'Qalam', audio: 'audio/vocabulaire/mot_10_qalam.mp3' },
+      { fr: 'Table', ar: 'طَاوِلَة', translit: 'Ṭāwila', audio: 'audio/vocabulaire/mot_11_tawila.mp3' },
+      { fr: 'Chaise', ar: 'كُرْسِي', translit: 'Kursī', audio: 'audio/vocabulaire/mot_12_kursi.mp3' },
       { fr: 'Cahier', ar: 'دَفْتَر', translit: 'Daftar' },
       { fr: 'Tableau', ar: 'سَبُّورَة', translit: 'Sabbūra' },
       { fr: 'Sac', ar: 'حَقِيبَة', translit: 'Ḥaqība' },
