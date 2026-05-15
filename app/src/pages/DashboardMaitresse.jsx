@@ -34,7 +34,7 @@ function ResourceStatus({ url, type }) {
     check()
   }, [url])
 
-  if (status === 'loading') return <div className="h-2 w-12 bg-slate-100 animate-pulse rounded-full" />
+  if (status === 'loading') return <div className="h-2 w-12 bg-slate-100 dark:bg-slate-800 animate-pulse rounded-full" />
 
   if (type === 'image') {
     return (
@@ -43,7 +43,7 @@ function ResourceStatus({ url, type }) {
           <div className="relative group">
             <img 
               src={url} alt="" 
-              className="w-10 h-10 object-contain rounded-lg border border-slate-200 bg-white shadow-sm transition-all group-hover:scale-[2.5] group-hover:z-50 group-hover:shadow-2xl" 
+              className="w-10 h-10 object-contain rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm transition-all group-hover:scale-[2.5] group-hover:z-50 group-hover:shadow-2xl" 
             />
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white" />
           </div>
@@ -77,7 +77,7 @@ function ProgressCard({ label, value, max = 20, colorClass, bgClass, toolTip }) 
         <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider">{label}</span>
         <span className={`text-xs font-black ${colorClass}`}>{percentage}%</span>
       </div>
-      <div className="h-1.5 w-full bg-white/50 rounded-full overflow-hidden">
+      <div className="h-1.5 w-full bg-white dark:bg-slate-800/50 rounded-full overflow-hidden">
         <div className={`h-full ${colorClass.replace('text-', 'bg-')} rounded-full transition-all duration-1000`} 
              style={{ width: `${Math.min(100, percentage)}%` }} />
       </div>
@@ -146,11 +146,11 @@ export default function DashboardMaitresse() {
     return (
       <div className="min-h-[80vh] flex items-center justify-center p-4">
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} 
-          className="w-full max-w-md bg-white rounded-[2.5rem] card-shadow p-10 border border-slate-100 text-center">
+          className="w-full max-w-md bg-white dark:bg-slate-800 rounded-[2.5rem] card-shadow p-10 border border-slate-100 dark:border-slate-700 text-center">
           <div className="w-20 h-20 bg-brand-50 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-inner">
             <Lock className="h-10 w-10 text-brand-600" />
           </div>
-          <h2 className="text-3xl font-black text-slate-800 mb-2">فضاء المعلمة</h2>
+          <h2 className="text-3xl font-black text-slate-800 dark:text-slate-100 mb-2">فضاء المعلمة</h2>
           <p className="text-slate-500 font-medium mb-8 uppercase text-xs tracking-widest">فضاء محمي</p>
           
           <div className="space-y-4 text-left" dir="ltr">
@@ -159,7 +159,7 @@ export default function DashboardMaitresse() {
               type="password" value={pin} onChange={e => setPin(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && handlePin()}
               placeholder="••••" autoFocus
-              className="w-full p-5 rounded-2xl border-2 border-slate-50 focus:border-brand-400 focus:ring-4 focus:ring-brand-50 outline-none font-black text-center text-4xl tracking-[0.5em] bg-slate-50 transition-all"
+              className="w-full p-5 rounded-2xl border-2 border-slate-50 focus:border-brand-400 focus:ring-4 focus:ring-brand-50 outline-none font-black text-center text-4xl tracking-[0.5em] bg-slate-50 dark:bg-slate-900 transition-all"
             />
             <button onClick={handlePin} className="w-full p-5 rounded-2xl bg-brand-600 text-white font-black text-lg hover:bg-brand-700 shadow-lg shadow-brand-100 transition-all active:scale-95">
               فتح القفل
@@ -185,18 +185,18 @@ export default function DashboardMaitresse() {
   return (
     <div className="flex flex-col md:flex-row min-h-[90vh] gap-6">
       {/* Mobile Header */}
-      <div className="md:hidden flex items-center justify-between p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
-        <h1 className="font-black text-slate-800 text-lg">Hurûfî Pro</h1>
-        <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 bg-slate-50 rounded-xl">
+      <div className="md:hidden flex items-center justify-between p-4 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+        <h1 className="font-black text-slate-800 dark:text-slate-100 text-lg">Hurûfî Pro</h1>
+        <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 bg-slate-50 dark:bg-slate-900 rounded-xl">
           {isSidebarOpen ? <X /> : <Menu />}
         </button>
       </div>
 
       {/* Sidebar Navigation */}
       <aside className={`fixed inset-0 z-50 md:relative md:block md:w-64 flex-shrink-0 transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
-        <div className="bg-white h-full md:h-auto rounded-[2rem] card-shadow p-4 sticky top-6 border border-slate-100">
+        <div className="bg-white dark:bg-slate-800 h-full md:h-auto rounded-[2rem] card-shadow p-4 sticky top-6 border border-slate-100 dark:border-slate-700">
           <div className="px-4 py-6 mb-4 hidden md:block">
-            <h1 className="text-xl font-black text-slate-800 flex items-center gap-2">
+            <h1 className="text-xl font-black text-slate-800 dark:text-slate-100 flex items-center gap-2">
               <div className="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white text-xs">H</div>
               Hurûfî Pro
             </h1>
@@ -209,7 +209,7 @@ export default function DashboardMaitresse() {
                 className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl font-bold text-sm transition-all ${
                   activeTab === item.id 
                     ? 'bg-brand-600 text-white shadow-lg shadow-brand-100' 
-                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+                    : 'text-slate-500 hover:bg-slate-50 dark:bg-slate-900 hover:text-slate-800 dark:text-slate-100'
                 }`}
                 aria-current={activeTab === item.id ? 'page' : undefined}
               >
@@ -229,9 +229,9 @@ export default function DashboardMaitresse() {
       {/* Main Content Area */}
       <main className="flex-1 min-w-0 p-4 md:p-8">
         {/* Hero Metrics Top */}
-        <div className="bg-white rounded-[2.5rem] p-8 border border-slate-50 shadow-sm mb-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 border border-slate-50 shadow-sm mb-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-left">
-            <h2 className="text-3xl font-black text-slate-800 mb-2 tracking-tight">Tableau de bord Pro</h2>
+            <h2 className="text-3xl font-black text-slate-800 dark:text-slate-100 mb-2 tracking-tight">Tableau de bord Pro</h2>
             <p className="text-slate-400 font-medium">Contrôle pédagogique avancé et certification</p>
           </div>
 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full md:w-auto">
@@ -256,7 +256,7 @@ export default function DashboardMaitresse() {
 
         <header className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4 px-2">
           <div>
-            <h2 className="text-2xl font-black text-slate-700 uppercase tracking-tighter">
+            <h2 className="text-2xl font-black text-slate-700 dark:text-slate-200 uppercase tracking-tighter">
               {menuItems.find(i => i.id === activeTab)?.label}
             </h2>
           </div>
@@ -272,7 +272,7 @@ export default function DashboardMaitresse() {
               <input 
                 type="text" placeholder="ابحث عن اسم..." 
                 value={searchTerm} onChange={e => setSearchTerm(e.target.value)}
-                className="pl-11 pr-6 py-3.5 rounded-2xl bg-white border border-slate-100 card-shadow outline-none focus:border-brand-400 focus:ring-4 focus:ring-brand-50 w-full sm:w-64 font-bold text-sm transition-all"
+                className="pl-11 pr-6 py-3.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 card-shadow outline-none focus:border-brand-400 focus:ring-4 focus:ring-brand-50 w-full sm:w-64 font-bold text-sm transition-all"
                 aria-label="البحث عن تلميذ"
               />
             </div>
@@ -289,8 +289,8 @@ export default function DashboardMaitresse() {
               <div className="space-y-6">
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
                   {filteredProfiles.length === 0 ? (
-                    <div className="col-span-full py-20 text-center bg-white rounded-[2.5rem] border-2 border-dashed border-slate-100 flex flex-col items-center">
-                      <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+                    <div className="col-span-full py-20 text-center bg-white dark:bg-slate-800 rounded-[2.5rem] border-2 border-dashed border-slate-100 dark:border-slate-700 flex flex-col items-center">
+                      <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-full flex items-center justify-center mb-4">
                         <Users className="h-8 w-8 text-slate-200" />
                       </div>
                       <p className="text-slate-400 font-bold">لم يُعثر على تلميذ.</p>
@@ -300,10 +300,10 @@ export default function DashboardMaitresse() {
                     filteredProfiles.map((p) => {
                       const stats = getStats(p.id)
                       return (
-                        <div key={p.id} className="bg-white rounded-[2.5rem] card-shadow p-7 border border-slate-50 group hover:border-brand-200 transition-all hover:shadow-xl">
+                        <div key={p.id} className="bg-white dark:bg-slate-800 rounded-[2.5rem] card-shadow p-7 border border-slate-50 group hover:border-brand-200 transition-all hover:shadow-xl">
                           <div className="flex items-start justify-between mb-6">
                             <div className="flex items-center gap-4">
-                              <div className={`w-20 h-20 rounded-[2rem] flex items-center justify-center text-5xl shadow-inner ${p.avatarColor || 'bg-slate-100'}`}>
+                              <div className={`w-20 h-20 rounded-[2rem] flex items-center justify-center text-5xl shadow-inner ${p.avatarColor || 'bg-slate-100 dark:bg-slate-800'}`}>
                                 {p.avatar && (p.avatar.includes('http') || p.avatar.includes('assets')) ? (
                                    <img src={p.avatar} alt="" className="w-16 h-16 object-contain" />
                                 ) : (
@@ -312,7 +312,7 @@ export default function DashboardMaitresse() {
                               </div>
                               <div>
                                 <div className="flex items-center gap-3">
-                                  <h3 className="text-2xl font-black text-slate-800 tracking-tight">{p.prenom}</h3>
+                                  <h3 className="text-2xl font-black text-slate-800 dark:text-slate-100 tracking-tight">{p.prenom}</h3>
                                   <button 
                                     onClick={() => generateStudentReport(p, stats, AuditingMetrics.getProfileSummary(p.id))}
                                     title="Exporter le rapport de progression"
@@ -369,13 +369,13 @@ export default function DashboardMaitresse() {
 
             {activeTab === 'audio' && (
               <div className="space-y-8">
-                <section className="bg-white rounded-[2.5rem] card-shadow p-8 border border-slate-50">
+                <section className="bg-white dark:bg-slate-800 rounded-[2.5rem] card-shadow p-8 border border-slate-50">
                   <header className="flex items-center justify-between mb-8">
                     <div>
-                       <h3 className="text-xl font-black text-slate-800">تدقيق صوتي: الحروف</h3>
+                       <h3 className="text-xl font-black text-slate-800 dark:text-slate-100">تدقيق صوتي: الحروف</h3>
                        <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">فحص وضوح النطق</p>
                     </div>
-                    <span className="px-4 py-1.5 rounded-full bg-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-tighter">28 ملف</span>
+                    <span className="px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-black uppercase tracking-tighter">28 ملف</span>
                   </header>
                   <div className="grid grid-cols-4 sm:grid-cols-7 lg:grid-cols-10 gap-3">
                     {alphabet.map(l => {
@@ -385,7 +385,7 @@ export default function DashboardMaitresse() {
                           key={l.id} onClick={() => playPreview(l.audio, `lettre-${l.id}`)}
                           aria-label={`Écouter la lettre ${l.lettre}`}
                           className={`group relative h-16 rounded-2xl border-2 flex items-center justify-center transition-all ${
-                            isActive ? 'bg-brand-600 border-brand-600 text-white shadow-xl scale-110 z-10' : 'bg-white border-slate-50 hover:border-brand-200 text-slate-700 hover:shadow-lg'
+                            isActive ? 'bg-brand-600 border-brand-600 text-white shadow-xl scale-110 z-10' : 'bg-white dark:bg-slate-800 border-slate-50 hover:border-brand-200 text-slate-700 dark:text-slate-200 hover:shadow-lg'
                           }`}
                         >
                           <span className="font-arabic text-2xl">{l.lettre}</span>
@@ -398,9 +398,9 @@ export default function DashboardMaitresse() {
                   </div>
                 </section>
 
-                <section className="bg-white rounded-[2.5rem] card-shadow p-8 border border-slate-50">
+                <section className="bg-white dark:bg-slate-800 rounded-[2.5rem] card-shadow p-8 border border-slate-50">
                   <header className="flex items-center justify-between mb-8">
-                    <h3 className="text-xl font-black text-slate-800">الأصوات والمفردات</h3>
+                    <h3 className="text-xl font-black text-slate-800 dark:text-slate-100">الأصوات والمفردات</h3>
                     <div className="flex gap-2">
                        <span className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-600 text-[9px] font-black uppercase">Contrastes</span>
                        <span className="px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 text-[9px] font-black uppercase">Capital Image</span>
@@ -412,7 +412,7 @@ export default function DashboardMaitresse() {
                         key={p.id} onClick={() => playPreview(p.audio, `phoneme-${p.id}`)}
                         aria-label={`Écouter le contraste ${p.lettre1.caractere} contre ${p.lettre2.caractere}`}
                         className={`p-5 rounded-3xl border-2 flex items-center justify-between transition-all ${
-                          playingId === `phoneme-${p.id}` ? 'bg-brand-600 border-brand-600 text-white shadow-xl' : 'bg-slate-50 border-transparent hover:border-slate-200'
+                          playingId === `phoneme-${p.id}` ? 'bg-brand-600 border-brand-600 text-white shadow-xl' : 'bg-slate-50 dark:bg-slate-900 border-transparent hover:border-slate-200 dark:border-slate-700'
                         }`}
                        >
                          <span className="font-arabic text-xl" dir="rtl">{p.lettre1.caractere} / {p.lettre2.caractere}</span>
@@ -427,20 +427,20 @@ export default function DashboardMaitresse() {
             )}
 
             {activeTab === 'assets' && (
-              <div className="bg-white rounded-[2.5rem] card-shadow overflow-hidden border border-slate-100">
-<div className="p-10 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
+              <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] card-shadow overflow-hidden border border-slate-100 dark:border-slate-700">
+<div className="p-10 bg-slate-50 dark:bg-slate-900 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
                    <div className="flex gap-4">
                       <div className="bg-emerald-100 text-emerald-600 px-4 py-2 rounded-xl text-xs font-black">MÉDIA OK</div>
                       <div className="bg-rose-100 text-rose-600 px-4 py-2 rounded-xl text-xs font-black">MANQUANT</div>
                    </div>
                    <div className="text-right">
-                      <h3 className="text-2xl font-black text-slate-800 mb-1">بيان حالة الوسائط</h3>
+                      <h3 className="text-2xl font-black text-slate-800 dark:text-slate-100 mb-1">بيان حالة الوسائط</h3>
                       <p className="text-slate-400 text-sm font-bold">فحص سلامة ملفات الوسائط.</p>
                    </div>
                 </div>
 <div className="overflow-x-auto">
                    <table className="w-full text-right" dir="rtl">
-                     <thead className="bg-white">
+                     <thead className="bg-white dark:bg-slate-800">
                        <tr className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] border-b border-slate-50">
                          <th className="p-8">المادة (Item)</th>
                          <th className="p-8 text-center">الصوت (Audio)</th>
@@ -452,9 +452,9 @@ export default function DashboardMaitresse() {
                      <tbody className="divide-y divide-slate-50">
                        <tr className="bg-brand-50/50"><td colSpan="5" className="p-4 font-black text-brand-700 text-xs uppercase tracking-widest px-8">قسم الحروف</td></tr>
                        {alphabet.slice(0, 28).map(l => (
-                         <tr key={l.id} className="hover:bg-slate-50/50 transition-colors group">
+                         <tr key={l.id} className="hover:bg-slate-50 dark:bg-slate-900/50 transition-colors group">
                            <td className="p-6 px-8">
-                             <span className="font-arabic font-black text-2xl text-slate-800 ml-3">{l.lettre}</span> 
+                             <span className="font-arabic font-black text-2xl text-slate-800 dark:text-slate-100 ml-3">{l.lettre}</span> 
                              <span className="text-xs text-slate-400 font-bold">({l.translit})</span>
                            </td>
                            <td className="p-6 text-center"><ResourceStatus url={l.audio} type="audio" /></td>
@@ -474,16 +474,16 @@ export default function DashboardMaitresse() {
 
                        {categories.map(cat => (
                          <React.Fragment key={cat.id}>
-                           <tr className="bg-slate-50/50">
+                           <tr className="bg-slate-50 dark:bg-slate-900/50">
                              <td colSpan="5" className="p-4 font-black text-brand-700 text-xs uppercase tracking-widest px-8">{cat.emoji} {cat.nomAr}</td>
                            </tr>
                            {cat.mots.map((m, idx) => (
-                             <tr key={idx} className="hover:bg-slate-50/50 transition-colors group">
+                             <tr key={idx} className="hover:bg-slate-50 dark:bg-slate-900/50 transition-colors group">
                                <td className="p-6 px-8 flex items-center gap-3">
                                  {cat.id === 'nombres' && (
-                                   <span className="bg-slate-100 px-2 py-1 rounded text-xs font-black text-slate-400 border border-slate-200">{m.fr}</span>
+                                   <span className="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded text-xs font-black text-slate-400 border border-slate-200 dark:border-slate-700">{m.fr}</span>
                                  )}
-                                 <span className="font-arabic font-black text-xl text-slate-800">{m.ar}</span> 
+                                 <span className="font-arabic font-black text-xl text-slate-800 dark:text-slate-100">{m.ar}</span> 
                                  <span className="text-[10px] text-slate-400 font-bold">({m.fr})</span>
                                </td>
                                <td className="p-6 text-center"><ResourceStatus url={m.audio} type="audio" /></td>
@@ -498,7 +498,7 @@ export default function DashboardMaitresse() {
                                  </button>
                                </td>
                                <td className="p-6 text-[10px] text-slate-300 font-mono group-hover:text-brand-600 transition-colors">
-                                 <span className="bg-slate-50 px-2 py-1 rounded border border-slate-100 break-all inline-block max-w-[250px]">
+                                 <span className="bg-slate-50 dark:bg-slate-900 px-2 py-1 rounded border border-slate-100 dark:border-slate-700 break-all inline-block max-w-[250px]">
                                    {m.image}
                                  </span>
                                </td>
@@ -532,19 +532,19 @@ export default function DashboardMaitresse() {
                 <div className="space-y-8">
                   {/* KPIs */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <div className="bg-white rounded-[2rem] p-6 border border-slate-100 card-shadow text-center">
+                    <div className="bg-white dark:bg-slate-800 rounded-[2rem] p-6 border border-slate-100 dark:border-slate-700 card-shadow text-center">
                       <p className="text-[10px] font-black text-slate-400 uppercase mb-1">إجمالي الأحداث</p>
-                      <p className="text-3xl font-black text-slate-800">{classSummary.totalEvents}</p>
+                      <p className="text-3xl font-black text-slate-800 dark:text-slate-100">{classSummary.totalEvents}</p>
                     </div>
-                    <div className="bg-white rounded-[2rem] p-6 border border-slate-100 card-shadow text-center">
+                    <div className="bg-white dark:bg-slate-800 rounded-[2rem] p-6 border border-slate-100 dark:border-slate-700 card-shadow text-center">
                       <p className="text-[10px] font-black text-slate-400 uppercase mb-1">Profils Actifs</p>
                       <p className="text-3xl font-black text-blue-600">{classSummary.totalProfiles}</p>
                     </div>
-                    <div className="bg-white rounded-[2rem] p-6 border border-slate-100 card-shadow text-center">
+                    <div className="bg-white dark:bg-slate-800 rounded-[2rem] p-6 border border-slate-100 dark:border-slate-700 card-shadow text-center">
                       <p className="text-[10px] font-black text-slate-400 uppercase mb-1">متوسط الوقت</p>
                       <p className="text-3xl font-black text-amber-600">{formatMs(classSummary.avgResponseTime)}</p>
                     </div>
-                    <div className="bg-white rounded-[2rem] p-6 border border-slate-100 card-shadow text-center">
+                    <div className="bg-white dark:bg-slate-800 rounded-[2rem] p-6 border border-slate-100 dark:border-slate-700 card-shadow text-center">
                       <p className="text-[10px] font-black text-slate-400 uppercase mb-1">تنبيهات</p>
                       <p className={`text-3xl font-black ${struggling.length > 0 ? 'text-rose-500' : 'text-emerald-500'}`}>
                         {struggling.length > 0 ? `⚠️ ${struggling.length}` : '✅ 0'}
@@ -561,9 +561,9 @@ export default function DashboardMaitresse() {
                       <p className="text-sm text-rose-600 font-medium mb-4">هؤلاء التلاميذ لديهم نسبة نجاح أقل من 40% :</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {struggling.map(p => (
-                          <div key={p.profileId} className="bg-white rounded-2xl p-4 border border-rose-100 flex items-center justify-between">
+                          <div key={p.profileId} className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-rose-100 flex items-center justify-between">
                             <div>
-                              <p className="font-black text-slate-800">{p.profileName || p.profileId}</p>
+                              <p className="font-black text-slate-800 dark:text-slate-100">{p.profileName || p.profileId}</p>
                               <p className="text-xs text-slate-400">{p.correctEvents + p.errorEvents} interactions</p>
                             </div>
                             <div className="text-right">
@@ -577,14 +577,14 @@ export default function DashboardMaitresse() {
                   )}
 
                   {/* Module Performance Table */}
-                  <div className="bg-white rounded-[2rem] card-shadow border border-slate-100 overflow-hidden">
+                  <div className="bg-white dark:bg-slate-800 rounded-[2rem] card-shadow border border-slate-100 dark:border-slate-700 overflow-hidden">
                     <div className="p-6 border-b border-slate-50">
-                      <h3 className="text-lg font-black text-slate-800">Performance par Module</h3>
+                      <h3 className="text-lg font-black text-slate-800 dark:text-slate-100">Performance par Module</h3>
                     </div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
                         <thead>
-                          <tr className="bg-slate-50">
+                          <tr className="bg-slate-50 dark:bg-slate-900">
                             <th className="text-left px-6 py-3 font-black text-slate-500 uppercase text-xs">Module</th>
                             <th className="text-center px-4 py-3 font-black text-slate-500 uppercase text-xs">تفاعلات</th>
                             <th className="text-center px-4 py-3 font-black text-emerald-500 uppercase text-xs">✅ صحيح</th>
@@ -596,18 +596,18 @@ export default function DashboardMaitresse() {
                         <tbody>
                           {Object.entries(modulePerf).map(([mod, data]) => (
                             <tr key={mod} className="border-t border-slate-50 hover:bg-slate-25">
-                              <td className="px-6 py-4 font-bold text-slate-700">
+                              <td className="px-6 py-4 font-bold text-slate-700 dark:text-slate-200">
                                 <span className="mr-2">{MODULE_LABELS[mod]?.emoji}</span>
                                 {MODULE_LABELS[mod]?.name || mod}
                               </td>
-                              <td className="px-4 py-4 text-center font-medium text-slate-600">{data.totalInteractions}</td>
+                              <td className="px-4 py-4 text-center font-medium text-slate-600 dark:text-slate-300">{data.totalInteractions}</td>
                               <td className="px-4 py-4 text-center font-bold text-emerald-600">{data.correct}</td>
                               <td className="px-4 py-4 text-center font-bold text-rose-500">{data.errors}</td>
                               <td className="px-4 py-4 text-center">
                                 <span className={`inline-block px-3 py-1 rounded-full text-xs font-black ${
                                   data.successRate >= 70 ? 'bg-emerald-50 text-emerald-600' :
                                   data.successRate >= 40 ? 'bg-amber-50 text-amber-600' :
-                                  data.totalInteractions === 0 ? 'bg-slate-50 text-slate-400' :
+                                  data.totalInteractions === 0 ? 'bg-slate-50 dark:bg-slate-900 text-slate-400' :
                                   'bg-rose-50 text-rose-600'
                                 }`}>
                                   {data.totalInteractions > 0 ? `${data.successRate}%` : '—'}
@@ -623,14 +623,14 @@ export default function DashboardMaitresse() {
 
                   {/* Per-Student Performance */}
                   {classSummary.profiles.length > 0 && (
-                    <div className="bg-white rounded-[2rem] card-shadow border border-slate-100 overflow-hidden">
+                    <div className="bg-white dark:bg-slate-800 rounded-[2rem] card-shadow border border-slate-100 dark:border-slate-700 overflow-hidden">
                       <div className="p-6 border-b border-slate-50">
-                        <h3 className="text-lg font-black text-slate-800">Performance par Élève</h3>
+                        <h3 className="text-lg font-black text-slate-800 dark:text-slate-100">Performance par Élève</h3>
                       </div>
                       <div className="overflow-x-auto">
                         <table className="w-full text-sm">
                           <thead>
-                            <tr className="bg-slate-50">
+                            <tr className="bg-slate-50 dark:bg-slate-900">
                               <th className="text-left px-6 py-3 font-black text-slate-500 uppercase text-xs">Élève</th>
                               <th className="text-center px-4 py-3 font-black text-slate-500 uppercase text-xs">Events</th>
                               <th className="text-center px-4 py-3 font-black text-blue-500 uppercase text-xs">النسبة</th>
@@ -642,8 +642,8 @@ export default function DashboardMaitresse() {
                           <tbody>
                             {classSummary.profiles.map(p => (
                               <tr key={p.profileId} className="border-t border-slate-50 hover:bg-slate-25">
-                                <td className="px-6 py-4 font-bold text-slate-700">{p.profileName || p.profileId}</td>
-                                <td className="px-4 py-4 text-center font-medium text-slate-600">{p.totalEvents}</td>
+                                <td className="px-6 py-4 font-bold text-slate-700 dark:text-slate-200">{p.profileName || p.profileId}</td>
+                                <td className="px-4 py-4 text-center font-medium text-slate-600 dark:text-slate-300">{p.totalEvents}</td>
                                 <td className="px-4 py-4 text-center">
                                   <span className={`inline-block px-3 py-1 rounded-full text-xs font-black ${
                                     p.successRate >= 70 ? 'bg-emerald-50 text-emerald-600' :
@@ -694,7 +694,7 @@ export default function DashboardMaitresse() {
                           location.reload()
                         }
                       }}
-                      className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-300 transition-all"
+                      className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-bold text-sm hover:bg-slate-300 transition-all"
                     >
                       <Trash2 className="h-4 w-4" /> إعادة تعيين
                     </button>
@@ -705,11 +705,11 @@ export default function DashboardMaitresse() {
 
             {activeTab === 'settings' && (
               <div className="max-w-2xl mx-auto space-y-6 pt-10 text-center">
-                <div className="bg-white rounded-[3rem] card-shadow p-12 border border-slate-50">
+                <div className="bg-white dark:bg-slate-800 rounded-[3rem] card-shadow p-12 border border-slate-50">
                   <div className="w-20 h-20 bg-rose-50 text-rose-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-inner">
                     <Trash2 className="h-10 w-10" />
                   </div>
-                  <h3 className="text-3xl font-black text-slate-800 mb-3">منطقة الصيانة</h3>
+                  <h3 className="text-3xl font-black text-slate-800 dark:text-slate-100 mb-3">منطقة الصيانة</h3>
                   <p className="text-slate-500 font-medium mb-10 max-w-sm mx-auto">تنبيه: حذف البيانات لا رجعة فيه ويشمل جميع ملفات التلاميذ.</p>
                   <div className="flex flex-col gap-3">
                     <button 
@@ -718,7 +718,7 @@ export default function DashboardMaitresse() {
                     >
                       حذف جميع ملفات التلاميذ
                     </button>
-                    <button className="w-full p-4 rounded-2xl bg-slate-100 text-slate-500 font-black text-sm hover:bg-slate-200 transition-all">
+                    <button className="w-full p-4 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-500 font-black text-sm hover:bg-slate-200 dark:bg-slate-700 transition-all">
                       حفظ النتائج (نسخة احتياطية)
                     </button>
                   </div>

@@ -23,7 +23,7 @@ export default function BadgesPage() {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gold-50 text-gold-500 mb-4 shadow-sm border border-gold-100">
           <Trophy className="w-8 h-8" />
         </div>
-        <h1 className="text-3xl font-black text-slate-800 mb-1">خزانة الأوسمة</h1>
+        <h1 className="text-3xl font-black text-slate-800 dark:text-slate-100 mb-1">خزانة الأوسمة</h1>
         <p className="font-arabic text-xl text-brand-600" dir="rtl">خِزَانَةُ الأَوْسِمَة</p>
         <p className="text-slate-500 font-medium mt-2">استمر في اللعب لفتح جميع الأوسمة! 🏅</p>
       </div>
@@ -38,10 +38,10 @@ export default function BadgesPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className={`relative overflow-hidden bg-white rounded-[2rem] border-2 p-6 transition-all duration-500 ${
+              className={`relative overflow-hidden bg-white dark:bg-slate-800 rounded-[2rem] border-2 p-6 transition-all duration-500 ${
                 unlocked 
                   ? 'border-gold-300 shadow-gold-100 shadow-xl' 
-                  : 'border-slate-100 opacity-80'
+                  : 'border-slate-100 dark:border-slate-700 opacity-80'
               }`}
             >
               {/* Background Gradient for Unlocked */}
@@ -51,14 +51,14 @@ export default function BadgesPage() {
 
               <div className="flex gap-5 items-start relative z-10">
                 <div className={`flex-shrink-0 w-20 h-20 rounded-2xl flex items-center justify-center text-4xl shadow-inner ${
-                  unlocked ? 'bg-gradient-to-br ' + badge.color + ' text-white scale-110 shadow-lg' : 'bg-slate-50 text-slate-300 grayscale'
+                  unlocked ? 'bg-gradient-to-br ' + badge.color + ' text-white scale-110 shadow-lg' : 'bg-slate-50 dark:bg-slate-900 text-slate-300 grayscale'
                 }`}>
                   {badge.emoji}
                 </div>
                 
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <h3 className={`font-black text-lg ${unlocked ? 'text-slate-800' : 'text-slate-400'}`}>
+                    <h3 className={`font-black text-lg ${unlocked ? 'text-slate-800 dark:text-slate-100' : 'text-slate-400'}`}>
                       {badge.nom}
                     </h3>
                     {unlocked ? (
@@ -77,7 +77,7 @@ export default function BadgesPage() {
                   {/* Progress Bar (simplified) */}
                   {!unlocked && (
                     <div className="mt-4">
-                       <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                       <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                           <div 
                             className="h-full bg-slate-300 rounded-full transition-all duration-1000" 
                             style={{ width: '30%' }} // Note: In a real app, calculate progress based on condition

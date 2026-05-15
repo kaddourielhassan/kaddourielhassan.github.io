@@ -77,21 +77,21 @@ export default function Accueil() {
             ✨ التعلّم الممتع ✨
           </div>
 
-          <p className="text-lg text-slate-600 leading-relaxed max-w-lg font-medium">
-            مرحبًا بك في تطبيق <strong className="text-slate-800">تعلّم العربية</strong>!
+          <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-lg font-medium">
+            مرحبًا بك في تطبيق <strong className="text-slate-800 dark:text-slate-100">تعلّم العربية</strong>!
             اكتشف <strong className="text-brand-600">الحروف</strong> و<strong className="text-brand-600">الأصوات</strong> والكثير من <strong className="text-brand-600">الكلمات</strong> عبر ألعاب ممتعة.
           </p>
 
           <div className="flex flex-wrap gap-3 pt-2">
             {['🎧 استماع', '🧠 ذاكرة', '👂 أصوات', '✏️ كتابة', '📷 كلمات'].map((item, i) => (
-              <span key={i} className="bg-white px-3 py-1.5 rounded-full text-sm font-bold text-slate-600 shadow-sm border border-slate-100">
+              <span key={i} className="bg-white dark:bg-slate-800 px-3 py-1.5 rounded-full text-sm font-bold text-slate-600 dark:text-slate-300 shadow-sm border border-slate-100 dark:border-slate-700">
                 {item}
               </span>
             ))}
           </div>
 
           <div className="flex flex-col xl:flex-row items-start xl:items-center gap-4 pt-2">
-            <div className="bg-white p-4 rounded-2xl border border-brand-100 flex items-start gap-3 shadow-sm max-w-md relative overflow-hidden flex-1">
+            <div className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-brand-100 flex items-start gap-3 shadow-sm max-w-md relative overflow-hidden flex-1">
               <div className="absolute top-0 left-0 w-1 h-full bg-brand-400" />
               <div className="h-9 w-9 flex-shrink-0 bg-brand-50 text-brand-500 rounded-xl flex items-center justify-center">
                 <Sparkles className="h-4 w-4" />
@@ -105,15 +105,15 @@ export default function Accueil() {
             {/* QR Code Card */}
             {currentUrl && (
               <div
-                className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex items-center gap-3 hover:shadow-md hover:border-brand-400/50 transition-all cursor-pointer"
+                className="bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center gap-3 hover:shadow-md hover:border-brand-400/50 transition-all cursor-pointer"
                 onClick={() => setIsQrExpanded(true)}
                 title="اضغط لتكبير رمز QR"
               >
-                <div className="bg-white p-1 rounded-lg border border-slate-50">
+                <div className="bg-white dark:bg-slate-800 p-1 rounded-lg border border-slate-50">
                   <QRCodeSVG value={currentUrl} size={64} level="L" fgColor="#0d9488" />
                 </div>
                 <div>
-                  <strong className="text-slate-700 flex items-center gap-1.5 text-sm mb-0.5">
+                  <strong className="text-slate-700 dark:text-slate-200 flex items-center gap-1.5 text-sm mb-0.5">
                     <QrCode className="w-4 h-4 text-brand-500" />
                     امسحني!
                   </strong>
@@ -128,14 +128,14 @@ export default function Accueil() {
 
 {/* Right — Profiles */}
         <motion.div
-          className="bg-white p-8 rounded-[2rem] card-shadow-lg border border-slate-100/50 w-full max-w-md mx-auto"
+          className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] card-shadow-lg border border-slate-100 dark:border-slate-700/50 w-full max-w-md mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           whileHover={{ scale: 1.02 }}
         >
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-black text-slate-800 mb-1">من أنت؟ 🧒</h2>
+            <h2 className="text-2xl font-black text-slate-800 dark:text-slate-100 mb-1">من أنت؟ 🧒</h2>
             <p className="text-slate-400 font-medium text-sm">اختر ملفك أو أنشئ ملفًا جديدًا</p>
           </div>
 
@@ -148,7 +148,7 @@ export default function Accueil() {
                   className={`w-full flex items-center gap-3 p-3.5 rounded-2xl border transition-all text-left group ${
                     activeProfile?.id === p.id
                       ? 'border-brand-400 bg-brand-50/50 shadow-sm'
-                      : 'border-slate-200 hover:border-brand-300 hover:shadow-md bg-white'
+                      : 'border-slate-200 dark:border-slate-700 hover:border-brand-300 hover:shadow-md bg-white dark:bg-slate-800'
                   }`}
               >
                 <div className={`h-12 w-12 rounded-xl flex items-center justify-center overflow-hidden group-hover:scale-110 transition-transform ${p.avatarColor || 'bg-brand-50 text-brand-600'}`}>
@@ -167,7 +167,7 @@ export default function Accueil() {
                   )}
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-slate-800 text-lg">{p.prenom}</h3>
+                  <h3 className="font-bold text-slate-800 dark:text-slate-100 text-lg">{p.prenom}</h3>
                   <p className="text-xs font-semibold text-brand-600">
                     {p.avatarName && <span className="text-slate-400">{p.avatarName} • </span>}
                     المستوى {p.niveau}
@@ -184,7 +184,7 @@ export default function Accueil() {
                       <span>التقدم</span>
                       <span>{Math.round(p.progress || 0)}%</span>
                     </div>
-                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                       <motion.div 
                         className="h-full bg-gradient-to-r from-brand-400 to-brand-600 rounded-full"
                         initial={{ width: 0 }}
@@ -202,7 +202,7 @@ export default function Accueil() {
               </button>
             ))}
             {profiles.length === 0 && !isCreating && (
-              <div className="text-center py-8 text-slate-300 font-medium border-2 border-dashed border-slate-200 rounded-2xl">
+              <div className="text-center py-8 text-slate-300 font-medium border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl">
                 لا يوجد ملف
               </div>
             )}
@@ -217,7 +217,7 @@ export default function Accueil() {
                 onKeyDown={e => e.key === 'Enter' && handleCreate()}
                 placeholder="اسمك"
                 autoFocus
-                className="w-full p-3.5 rounded-xl border-2 border-slate-200 focus:border-brand-400 outline-none font-bold bg-white"
+                className="w-full p-3.5 rounded-xl border-2 border-slate-200 dark:border-slate-700 focus:border-brand-400 outline-none font-bold bg-white dark:bg-slate-800"
               />
               {/* Objectif hebdomadaire */}
               <div>
@@ -227,7 +227,7 @@ export default function Accueil() {
                     <button
                       key={pts}
                       onClick={() => setNewGoal(pts)}
-                      className={`p-2 rounded-lg text-xs font-bold transition-all ${newGoal === pts ? 'bg-brand-500 text-white' : 'bg-white border border-slate-200'}`}
+                      className={`p-2 rounded-lg text-xs font-bold transition-all ${newGoal === pts ? 'bg-brand-500 text-white' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700'}`}
                     >
                       {pts} ⭐
                     </button>
@@ -242,7 +242,7 @@ export default function Accueil() {
                     <button
                       key={diff}
                       onClick={() => setDifficulty(['easy', 'normal', 'hard'][i])}
-                      className={`flex-1 p-2 rounded-lg text-xs font-bold transition-all ${difficulty === ['easy', 'normal', 'hard'][i] ? 'bg-brand-500 text-white' : 'bg-white border border-slate-200'}`}
+                      className={`flex-1 p-2 rounded-lg text-xs font-bold transition-all ${difficulty === ['easy', 'normal', 'hard'][i] ? 'bg-brand-500 text-white' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700'}`}
                     >
                       {diff}
                     </button>
@@ -260,7 +260,7 @@ export default function Accueil() {
                       className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all overflow-hidden ${
                         selectedAvatar === i
                           ? `${a.color} scale-105 shadow-md ring-2 ring-brand-400`
-                          : 'bg-white hover:bg-slate-50 border border-slate-100'
+                          : 'bg-white dark:bg-slate-800 hover:bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700'
                       }`}
                     >
                       <div className="h-10 w-10 flex items-center justify-center">
@@ -285,7 +285,7 @@ export default function Accueil() {
               </div>
 
               <div className="flex gap-2 pt-1">
-                <button onClick={() => { setIsCreating(false); setNewName('') }} className="flex-1 p-3 rounded-xl font-bold text-slate-500 bg-slate-200 hover:bg-slate-300 transition-colors">
+                <button onClick={() => { setIsCreating(false); setNewName('') }} className="flex-1 p-3 rounded-xl font-bold text-slate-500 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 transition-colors">
                   إلغاء
                 </button>
                 <button onClick={handleCreate} disabled={!newName.trim()} className="flex-1 p-3 rounded-xl font-bold text-white bg-brand-600 hover:bg-brand-700 disabled:opacity-50 transition-colors">
@@ -312,11 +312,11 @@ export default function Accueil() {
           onClick={() => setIsQrExpanded(false)}
         >
           <motion.div
-            className="bg-white p-10 rounded-[2.5rem] shadow-2xl max-w-lg w-full text-center flex flex-col items-center"
+            className="bg-white dark:bg-slate-800 p-10 rounded-[2.5rem] shadow-2xl max-w-lg w-full text-center flex flex-col items-center"
             onClick={e => e.stopPropagation()}
             initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
           >
-            <h3 className="text-3xl font-black text-slate-800 mb-2 flex items-center gap-3 justify-center">
+            <h3 className="text-3xl font-black text-slate-800 dark:text-slate-100 mb-2 flex items-center gap-3 justify-center">
               <QrCode className="w-8 h-8 text-brand-500" />
               امسح للعب!
             </h3>
@@ -324,7 +324,7 @@ export default function Accueil() {
               امسح رمز QR من هاتفك أو جهازك اللوحي.
             </p>
             <p className="font-arabic text-lg text-brand-600 mb-6" dir="rtl">اِمْسَحْ لِلَّعِب!</p>
-            <div className="bg-white p-6 rounded-3xl shadow-sm border-2 border-brand-100 inline-block mb-8">
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border-2 border-brand-100 inline-block mb-8">
               <QRCodeSVG value={currentUrl} size={300} level="M" fgColor="#0d9488" />
             </div>
             <button

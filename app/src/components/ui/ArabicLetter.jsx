@@ -7,7 +7,7 @@ export default function ArabicLetter({ lettre, color, size = 'text-6xl', classNa
     ? 'border-coral-400 bg-coral-50 shadow-coral-200'
     : selected
     ? 'border-brand-400 bg-brand-50 shadow-brand-200'
-    : 'border-slate-200 bg-white hover:border-brand-300 hover:shadow-lg'
+    : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-brand-300 hover:shadow-lg'
 
   return (
     <div

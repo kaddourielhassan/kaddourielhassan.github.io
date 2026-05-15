@@ -91,18 +91,18 @@ export default function MemoryLettres() {
     return (
       <motion.div className="max-w-md mx-auto text-center py-16" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
         <div className="text-7xl mb-4">🏆</div>
-        <h2 className="text-3xl font-black text-slate-800 mb-2">تم العثور على كل الأزواج!</h2>
+        <h2 className="text-3xl font-black text-slate-800 dark:text-slate-100 mb-2">تم العثور على كل الأزواج!</h2>
         <p className="font-arabic text-2xl text-brand-600 mb-6" dir="rtl">مُمْتَاز!</p>
-        <div className="bg-white rounded-2xl card-shadow p-6 mb-6 space-y-2">
-          <p className="text-slate-600 font-medium">⏱️ الوقت: <strong>{formatTime(timer)}</strong></p>
-          <p className="text-slate-600 font-medium">🎯 المحاولات: <strong>{moves}</strong></p>
+        <div className="bg-white dark:bg-slate-800 rounded-2xl card-shadow p-6 mb-6 space-y-2">
+          <p className="text-slate-600 dark:text-slate-300 font-medium">⏱️ الوقت: <strong>{formatTime(timer)}</strong></p>
+          <p className="text-slate-600 dark:text-slate-300 font-medium">🎯 المحاولات: <strong>{moves}</strong></p>
           <p className="text-2xl font-black text-gold-500">+{pts} ⭐</p>
         </div>
         <div className="flex gap-3 justify-center">
           <button onClick={initGame} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-600 text-white font-bold hover:bg-brand-700 transition-colors">
             <RotateCcw className="h-4 w-4" /> أعد اللعب
           </button>
-          <Link to="/modules" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-200 text-slate-700 font-bold hover:bg-slate-300 transition-colors">
+          <Link to="/modules" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold hover:bg-slate-300 transition-colors">
             <ArrowLeft className="h-4 w-4" /> رجوع
           </Link>
         </div>
@@ -122,7 +122,7 @@ export default function MemoryLettres() {
         <span className="font-bold text-sm text-slate-500">🎯 {moves} محاولة</span>
       </div>
 
-      <h2 className="text-center text-xl font-bold text-slate-700 mb-1">اعثر على الأزواج!</h2>
+      <h2 className="text-center text-xl font-bold text-slate-700 dark:text-slate-200 mb-1">اعثر على الأزواج!</h2>
       <p className="text-center font-arabic text-brand-600 mb-6" dir="rtl">جِدِ الأَزْوَاج!</p>
 
       <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
@@ -138,13 +138,13 @@ export default function MemoryLettres() {
               disabled={isFlipped || isMatched}
               className={`aspect-square rounded-[2rem] border-2 transition-all duration-300 flex items-center justify-center p-2 premium-memory-card ${
                 isMatched ? 'bg-emerald-50 border-emerald-300 opacity-70 scale-95' :
-                showFace ? 'bg-white border-brand-300 shadow-xl' :
+                showFace ? 'bg-white dark:bg-slate-800 border-brand-300 shadow-xl' :
                 'memory-back-pattern'
               }`}
               whileTap={{ scale: 0.95 }}
             >
               {showFace ? (
-                <span className={`font-arabic ${card.type === 'lettre' ? 'text-3xl sm:text-5xl' : 'text-lg sm:text-xl text-slate-700'}`}
+                <span className={`font-arabic ${card.type === 'lettre' ? 'text-3xl sm:text-5xl' : 'text-lg sm:text-xl text-slate-700 dark:text-slate-200'}`}
                   style={{ color: card.color }} dir="rtl">
                   {card.display}
                 </span>

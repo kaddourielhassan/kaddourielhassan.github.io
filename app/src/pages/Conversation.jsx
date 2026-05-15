@@ -122,15 +122,15 @@ export default function Conversation() {
         </Link>
         <div className="flex items-center gap-2">
           <span className="text-2xl">{scenario.emoji}</span>
-          <span className="font-bold text-slate-600">{scenario.title}</span>
+          <span className="font-bold text-slate-600 dark:text-slate-300">{scenario.title}</span>
         </div>
       </div>
 
-      <div className="bg-white rounded-[2rem] card-shadow p-8 mb-8 relative overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-[2rem] card-shadow p-8 mb-8 relative overflow-hidden">
         {/* Progress Dots */}
         <div className="flex gap-2 mb-8 justify-center">
           {scenario.rounds.map((_, i) => (
-            <div key={i} className={`h-2 w-8 rounded-full transition-all duration-300 ${i <= currentRound ? 'bg-brand-500' : 'bg-slate-100'}`} />
+            <div key={i} className={`h-2 w-8 rounded-full transition-all duration-300 ${i <= currentRound ? 'bg-brand-500' : 'bg-slate-100 dark:bg-slate-800'}`} />
           ))}
         </div>
 
@@ -178,7 +178,7 @@ export default function Conversation() {
                         ? option.correct
                           ? 'bg-emerald-50 border-emerald-500 text-emerald-700'
                           : 'bg-rose-50 border-rose-500 text-rose-700'
-                        : 'bg-white border-slate-100 hover:border-brand-300 hover:shadow-md text-slate-700'
+                        : 'bg-white dark:bg-slate-800 border-slate-100 dark:border-slate-700 hover:border-brand-300 hover:shadow-md text-slate-700 dark:text-slate-200'
                     }`}
                   >
                     {selectedOption === i && (
@@ -198,7 +198,7 @@ export default function Conversation() {
               className="text-center py-8"
             >
               <div className="text-6xl mb-6">🎯</div>
-              <h3 className="text-2xl font-black text-slate-800 mb-2">أحسنت!</h3>
+              <h3 className="text-2xl font-black text-slate-800 dark:text-slate-100 mb-2">أحسنت!</h3>
               <p className="text-slate-500 mb-8">لقد أكملت هذا الحوار بنجاح</p>
               
               {currentScenario + 1 < conversations.length ? (

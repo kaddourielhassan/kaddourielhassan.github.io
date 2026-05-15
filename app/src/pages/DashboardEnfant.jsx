@@ -31,7 +31,7 @@ export default function DashboardEnfant() {
       </Link>
 
       {/* Profile Card */}
-      <motion.div className="bg-white rounded-3xl card-shadow p-6 mb-6 text-center" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
+      <motion.div className="bg-white dark:bg-slate-800 rounded-3xl card-shadow p-6 mb-6 text-center" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
         <div className="flex justify-center mb-3">
           <div className="w-24 h-24 rounded-[2rem] overflow-hidden shadow-lg border-4 border-white bg-brand-50">
             {activeProfile.avatar?.startsWith('/') ? (
@@ -41,7 +41,7 @@ export default function DashboardEnfant() {
             )}
           </div>
         </div>
-        <h2 className="text-2xl font-black text-slate-800">{activeProfile.prenom}</h2>
+        <h2 className="text-2xl font-black text-slate-800 dark:text-slate-100">{activeProfile.prenom}</h2>
         <div className="flex items-center justify-center gap-4 mt-3">
           <span className="bg-gold-100 text-gold-600 px-4 py-1.5 rounded-full font-bold text-sm flex items-center gap-1">
             <Star className="h-4 w-4" fill="currentColor" /> {activeProfile.pointsTotal} نقطة
@@ -57,9 +57,9 @@ export default function DashboardEnfant() {
         </div>
       </motion.div>
 
-      <div className="bg-white rounded-3xl card-shadow p-5 mb-6 border border-brand-100">
+      <div className="bg-white dark:bg-slate-800 rounded-3xl card-shadow p-5 mb-6 border border-brand-100">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="font-black text-slate-800">مهمة اليوم</h3>
+          <h3 className="font-black text-slate-800 dark:text-slate-100">مهمة اليوم</h3>
           <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${dailyQuest.completed ? 'bg-emerald-100 text-emerald-600' : 'bg-brand-50 text-brand-600'}`}>
             {dailyQuest.completed ? 'مكتملة' : 'قيد التنفيذ'}
           </span>
@@ -71,8 +71,8 @@ export default function DashboardEnfant() {
       </div>
 
       {/* Progress by exercise */}
-      <div className="bg-white rounded-3xl card-shadow p-6 mb-6">
-        <h3 className="font-black text-lg text-slate-800 mb-4">📊 تقدمي</h3>
+      <div className="bg-white dark:bg-slate-800 rounded-3xl card-shadow p-6 mb-6">
+        <h3 className="font-black text-lg text-slate-800 dark:text-slate-100 mb-4">📊 تقدمي</h3>
         <div className="space-y-4">
           {exercices.map(ex => (
             <div key={ex.key} className="flex items-center gap-3">
@@ -86,9 +86,9 @@ export default function DashboardEnfant() {
       </div>
 
       {/* Badges */}
-      <div className="bg-white rounded-3xl card-shadow p-6">
+      <div className="bg-white dark:bg-slate-800 rounded-3xl card-shadow p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-black text-lg text-slate-800 flex items-center gap-2">
+          <h3 className="font-black text-lg text-slate-800 dark:text-slate-100 flex items-center gap-2">
             <Trophy className="h-5 w-5 text-gold-500" /> شاراتي
           </h3>
           <Link to="/badges" className="text-xs font-bold text-brand-600 hover:underline">
@@ -103,11 +103,11 @@ export default function DashboardEnfant() {
                 className={`p-4 rounded-2xl text-center border-2 transition-all ${
                   unlocked
                     ? 'border-gold-300 bg-gold-50 shadow-sm'
-                    : 'border-slate-100 bg-slate-50 opacity-50 grayscale'
+                    : 'border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 opacity-50 grayscale'
                 }`}
               >
                 <div className={`text-3xl mb-2 ${unlocked ? 'animate-float' : ''}`}>{badge.emoji}</div>
-                <p className="font-bold text-xs text-slate-700">{badge.nom}</p>
+                <p className="font-bold text-xs text-slate-700 dark:text-slate-200">{badge.nom}</p>
                 <p className="font-arabic text-xs text-brand-500 mt-0.5" dir="rtl">{badge.nomAr}</p>
                 {!unlocked && <p className="text-[10px] text-slate-400 mt-1">{badge.description}</p>}
               </div>

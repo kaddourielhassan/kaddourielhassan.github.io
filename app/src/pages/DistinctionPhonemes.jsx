@@ -106,9 +106,9 @@ export default function DistinctionPhonemes() {
     return (
       <motion.div className="max-w-md mx-auto text-center py-16" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
         <div className="text-7xl mb-4">{score >= 120 ? '🎉' : '💪'}</div>
-        <h2 className="text-3xl font-black text-slate-800 mb-2">اكتمل التمرين!</h2>
+        <h2 className="text-3xl font-black text-slate-800 dark:text-slate-100 mb-2">اكتمل التمرين!</h2>
         <p className="font-arabic text-2xl text-brand-600 mb-4" dir="rtl">أَحْسَنْتَ!</p>
-        <div className="bg-white rounded-2xl card-shadow p-6 mb-6">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl card-shadow p-6 mb-6">
           <div className="flex items-center justify-center gap-2 text-4xl font-black text-gold-500 mb-2">
             <Trophy className="h-8 w-8" /> {score}
           </div>
@@ -118,7 +118,7 @@ export default function DistinctionPhonemes() {
           <button onClick={restart} className="flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-600 text-white font-bold hover:bg-brand-700 transition-colors">
             <RotateCcw className="h-4 w-4" /> أعد اللعب
           </button>
-          <Link to="/modules" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-200 text-slate-700 font-bold hover:bg-slate-300 transition-colors">
+          <Link to="/modules" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold hover:bg-slate-300 transition-colors">
             <ArrowLeft className="h-4 w-4" /> رجوع
           </Link>
         </div>
@@ -138,7 +138,7 @@ export default function DistinctionPhonemes() {
         <span className="bg-gold-100 text-gold-600 px-3 py-1 rounded-full font-bold text-sm">⭐ {score}</span>
       </div>
 
-      <div className="w-full h-2.5 bg-slate-100 rounded-full mb-8 overflow-hidden">
+      <div className="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full mb-8 overflow-hidden">
         <div className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full transition-all duration-500" style={{ width: `${(currentIndex / phonemes.length) * 100}%` }} />
       </div>
 
@@ -151,7 +151,7 @@ export default function DistinctionPhonemes() {
           className="text-center"
         >
           <div className="text-4xl mb-4">{current.emoji}</div>
-          <h2 className="text-xl font-bold text-slate-700 mb-1">أي صوت تسمع؟</h2>
+          <h2 className="text-xl font-bold text-slate-700 dark:text-slate-200 mb-1">أي صوت تسمع؟</h2>
           <p className="text-sm text-slate-400 font-medium mb-2">{current.lettre1.nom} ({current.lettre1.type}) vs {current.lettre2.nom} ({current.lettre2.type})</p>
           <p className="font-arabic text-lg text-brand-600 mb-6" dir="rtl">أَيُّ صَوْتٍ تَسْمَعُ؟</p>
 
@@ -174,11 +174,11 @@ export default function DistinctionPhonemes() {
             ].map(({ data, isFirst }) => {
               const sel = selected === (isFirst ? 'first' : 'second')
               const isAnswer = isFirst === targetIsFirst
-              let cls = 'bg-white border-slate-200 hover:border-emerald-300 hover:shadow-lg'
+              let cls = 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-emerald-300 hover:shadow-lg'
               if (selected !== null) {
                 if (isAnswer) cls = 'bg-emerald-50 border-emerald-400'
                 else if (sel) cls = 'bg-coral-50 border-coral-400'
-                else cls = 'bg-white border-slate-100 opacity-50'
+                else cls = 'bg-white dark:bg-slate-800 border-slate-100 dark:border-slate-700 opacity-50'
               }
 
               return (
@@ -204,7 +204,7 @@ export default function DistinctionPhonemes() {
             </motion.div>
           )}
 
-          <div className="mt-4 bg-slate-50 p-3 rounded-xl">
+          <div className="mt-4 bg-slate-50 dark:bg-slate-900 p-3 rounded-xl">
             <p className="text-xs text-slate-400 font-medium">💡 {current.astuce}</p>
           </div>
         </motion.div>

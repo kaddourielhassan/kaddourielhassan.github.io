@@ -39,7 +39,7 @@ export default function FlashcardsVocabulaire() {
             <motion.button
               key={cat.id}
               onClick={() => { setSelectedCat(cat); setCardIndex(0); setRevealed(false); setSeenCount(0) }}
-              className="bg-white rounded-2xl card-shadow border border-slate-100 p-4 text-left hover:card-shadow-lg hover:border-brand-200 transition-all group"
+              className="bg-white dark:bg-slate-800 rounded-2xl card-shadow border border-slate-100 dark:border-slate-700 p-4 text-left hover:card-shadow-lg hover:border-brand-200 transition-all group"
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
             >
               <span className="text-3xl block mb-2 group-hover:scale-110 transition-transform inline-block">
@@ -95,7 +95,7 @@ export default function FlashcardsVocabulaire() {
         <span className="bg-gold-100 text-gold-600 px-3 py-1 rounded-full font-bold text-sm">👁️ {seenCount}</span>
       </div>
 
-      <div className="w-full h-2.5 bg-slate-100 rounded-full mb-6 overflow-hidden">
+      <div className="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full mb-6 overflow-hidden">
         <div className="h-full bg-gradient-to-r from-rose-400 to-rose-600 rounded-full transition-all duration-500" style={{ width: `${((cardIndex + 1) / mots.length) * 100}%` }} />
       </div>
 
@@ -113,12 +113,12 @@ export default function FlashcardsVocabulaire() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -direction * 60 }}
           transition={{ duration: 0.3 }}
-          className="bg-white rounded-3xl card-shadow-lg border border-slate-100 p-8 text-center mb-6 min-h-[280px] flex flex-col items-center justify-center"
+          className="bg-white dark:bg-slate-800 rounded-3xl card-shadow-lg border border-slate-100 dark:border-slate-700 p-8 text-center mb-6 min-h-[280px] flex flex-col items-center justify-center"
         >
           <img
             src={mot.image || fallbackImage}
             alt={mot.ar}
-            className="w-full max-w-xs h-44 object-cover rounded-2xl border border-slate-100 mb-6"
+            className="w-full max-w-xs h-44 object-cover rounded-2xl border border-slate-100 dark:border-slate-700 mb-6"
             onError={(e) => {
               e.currentTarget.onerror = null
               e.currentTarget.src = fallbackImage
@@ -127,7 +127,7 @@ export default function FlashcardsVocabulaire() {
           {/* Digit display for numbers category */}
           {selectedCat.id === 'nombres' && (
             <div className="mb-4">
-              <span className="text-5xl font-black text-slate-200 bg-slate-50 px-6 py-2 rounded-2xl border-2 border-slate-100">
+              <span className="text-5xl font-black text-slate-200 bg-slate-50 dark:bg-slate-900 px-6 py-2 rounded-2xl border-2 border-slate-100 dark:border-slate-700">
                 {mot.fr}
               </span>
             </div>
@@ -142,7 +142,7 @@ export default function FlashcardsVocabulaire() {
           {/* French reveal */}
           {revealed ? (
             <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="space-y-2">
-              <p className="text-2xl font-black text-slate-800">{mot.fr}</p>
+              <p className="text-2xl font-black text-slate-800 dark:text-slate-100">{mot.fr}</p>
               <p className="text-sm font-medium text-slate-400 italic">{mot.translit}</p>
               <p className="text-xs text-emerald-500 font-bold mt-2">+5 ⭐</p>
             </motion.div>
@@ -158,7 +158,7 @@ export default function FlashcardsVocabulaire() {
       {/* Navigation */}
       <div className="flex justify-center gap-4">
         <button onClick={() => goTo(-1)} disabled={cardIndex === 0}
-          className="h-12 w-12 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200 disabled:opacity-30 transition-all">
+          className="h-12 w-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center hover:bg-slate-200 dark:bg-slate-700 disabled:opacity-30 transition-all">
           <ChevronLeft className="h-5 w-5" />
         </button>
         <button onClick={() => goTo(1)} disabled={cardIndex >= mots.length - 1}

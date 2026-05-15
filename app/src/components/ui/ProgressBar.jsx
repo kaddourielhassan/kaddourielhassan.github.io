@@ -14,13 +14,13 @@ export default function ProgressBar({ value, max, color = 'brand', label, showFr
     <div className="w-full">
       {label && (
         <div className="flex justify-between items-center mb-1.5">
-          <span className="text-sm font-bold text-slate-600">{label}</span>
+          <span className="text-sm font-bold text-slate-600 dark:text-slate-300">{label}</span>
           {showFraction && (
             <span className="text-sm font-bold text-slate-500">{value}/{max}</span>
           )}
         </div>
       )}
-      <div className="w-full h-4 bg-slate-100 rounded-full overflow-hidden">
+      <div className="w-full h-4 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
         <div
           className={`h-full rounded-full transition-all duration-700 ease-out ${colorMap[color] || colorMap.brand}`}
           style={{ width: `${pct}%` }}

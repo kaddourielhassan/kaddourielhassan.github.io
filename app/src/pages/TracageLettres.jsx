@@ -129,17 +129,17 @@ export default function TracageLettres() {
         <span className="bg-gold-100 text-gold-600 px-3 py-1 rounded-full font-bold text-sm">✅ {completedCount}</span>
       </div>
 
-      <div className="w-full h-2.5 bg-slate-100 rounded-full mb-6 overflow-hidden">
+      <div className="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full mb-6 overflow-hidden">
         <div className="h-full bg-gradient-to-r from-amber-400 to-amber-600 rounded-full transition-all duration-500" style={{ width: `${(currentIndex / lettresPrioritaires.length) * 100}%` }} />
       </div>
 
       <div className="text-center mb-4">
-        <h2 className="text-xl font-bold text-slate-700 mb-1">تتبّع الحرف!</h2>
+        <h2 className="text-xl font-bold text-slate-700 dark:text-slate-200 mb-1">تتبّع الحرف!</h2>
         <p className="font-arabic text-lg text-brand-600" dir="rtl">اُكْتُبْ الحَرْف!</p>
       </div>
 
       {/* Ghost Letter + Canvas */}
-      <div className="relative bg-white rounded-3xl card-shadow border-2 border-slate-100 overflow-hidden mb-4" style={{ aspectRatio: '1' }}>
+      <div className="relative bg-white dark:bg-slate-800 rounded-3xl card-shadow border-2 border-slate-100 dark:border-slate-700 overflow-hidden mb-4" style={{ aspectRatio: '1' }}>
         {/* Ghost letter behind */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <span className="font-arabic text-[12rem] text-slate-100 select-none" style={{ opacity: 0.25 }}>
@@ -166,12 +166,12 @@ export default function TracageLettres() {
       {/* Letter info */}
       <div className="text-center mb-4">
         <span className="font-arabic text-4xl mr-3" style={{ color: letter.color }}>{letter.lettre}</span>
-        <span className="text-lg font-bold text-slate-600">{letter.translit}</span>
+        <span className="text-lg font-bold text-slate-600 dark:text-slate-300">{letter.translit}</span>
       </div>
 
       {/* Actions */}
       <div className="flex gap-3 justify-center">
-        <button onClick={clearCanvas} className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-300 transition-colors">
+        <button onClick={clearCanvas} className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-bold text-sm hover:bg-slate-300 transition-colors">
           <Eraser className="h-4 w-4" /> مسح
         </button>
 

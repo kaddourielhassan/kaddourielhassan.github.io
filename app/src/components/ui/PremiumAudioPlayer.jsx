@@ -39,7 +39,7 @@ export default function PremiumAudioPlayer({ url, fallbackText, size = 'md', cla
     switch (status) {
       case 'loading':
         return { 
-          bg: 'bg-slate-100', 
+          bg: 'bg-slate-100 dark:bg-slate-800', 
           icon: <Loader2 className="animate-spin text-slate-400" size={iconSizes[size]} />,
           cursor: 'cursor-wait'
         }
@@ -57,7 +57,7 @@ export default function PremiumAudioPlayer({ url, fallbackText, size = 'md', cla
         }
       default:
         return { 
-          bg: 'bg-white text-brand-600 border-2 border-brand-100 hover:border-brand-400 hover:scale-105 shadow-sm', 
+          bg: 'bg-white dark:bg-slate-800 text-brand-600 border-2 border-brand-100 hover:border-brand-400 hover:scale-105 shadow-sm', 
           icon: <Play size={iconSizes[size]} className="ml-1" />, // Play icon for idle
           cursor: 'cursor-pointer'
         }

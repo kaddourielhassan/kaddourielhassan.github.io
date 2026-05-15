@@ -29,7 +29,7 @@ export default function Modules() {
         className="text-center mb-8"
         initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
       >
-        <h1 className="text-3xl font-black text-slate-800 mb-1 flex items-center justify-center gap-3">
+        <h1 className="text-3xl font-black text-slate-800 dark:text-slate-100 mb-1 flex items-center justify-center gap-3">
           مَرْحَبًا {activeProfile.prenom} ! 
           <div className="w-12 h-12 rounded-2xl bg-brand-50 overflow-hidden shadow-sm border border-brand-100 flex-shrink-0">
             {activeProfile.avatar?.startsWith('/') ? (
@@ -71,7 +71,7 @@ export default function Modules() {
             >
               <Link
                 to={exo.path}
-                className="block bg-white rounded-3xl card-shadow border border-slate-100 hover:card-shadow-lg hover:border-brand-200 transition-all duration-300 overflow-hidden group"
+                className="block bg-white dark:bg-slate-800 rounded-3xl card-shadow border border-slate-100 dark:border-slate-700 hover:card-shadow-lg hover:border-brand-200 transition-all duration-300 overflow-hidden group"
               >
                 <div className={`bg-gradient-to-br ${exo.color} p-5 text-white relative overflow-hidden`}>
                   <div className="absolute -top-4 -right-4 text-6xl opacity-20 group-hover:scale-110 transition-transform">
