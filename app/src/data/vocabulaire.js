@@ -60,7 +60,7 @@ const rawCategories = [
   {
     id: 'animaux', nom: 'Les animaux', nomAr: 'الحَيَوَانَات', emoji: '🐱',
     mots: [
-      { fr: 'Chat', ar: 'قِطّ', translit: 'Qiṭṭ', image: '/resources/images/vocabulaire/animaux-1.webp' },
+      { fr: 'Chat', ar: 'قِطّ', tts: 'قِطٌّ', translit: 'Qiṭṭ', image: '/resources/images/vocabulaire/animaux-1.webp' },
       { fr: 'Chien', ar: 'كَلْب', translit: 'Kalb', image: '/resources/images/vocabulaire/animaux-2.webp' },
       { fr: 'Oiseau', ar: 'طَائِر', translit: "Ta'ir", image: '/resources/images/vocabulaire/animaux-3.webp' },
       { fr: 'Poisson', ar: 'سَمَك', translit: 'Samak', image: '/resources/images/vocabulaire/animaux-4.webp' },

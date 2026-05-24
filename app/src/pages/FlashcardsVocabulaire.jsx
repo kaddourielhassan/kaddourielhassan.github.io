@@ -137,7 +137,7 @@ export default function FlashcardsVocabulaire() {
           <p className="font-arabic text-6xl text-brand-700 mb-6" dir="rtl">{mot.ar}</p>
 
           {/* Audio button */}
-          <AudioButton audioPath={mot.audio} speakText={mot.ar} size="xl" className="mb-6" />
+          <AudioButton audioPath={mot.audio} speakText={mot.tts || mot.ar} size="xl" className="mb-6" />
 
           {/* French reveal */}
           {revealed ? (
