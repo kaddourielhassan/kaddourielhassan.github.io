@@ -13,7 +13,7 @@ export default function PremiumAudioPlayer({ url, fallbackText, size = 'md', cla
   useEffect(() => {
     // Préfixe avec l'URL publique si c'est un chemin relatif
     if (url && !url.startsWith('http') && !url.startsWith('blob:')) {
-      const base = process.env.PUBLIC_URL || ''
+      const base = import.meta.env.BASE_URL || ''
       setFullUrl(`${base}${url.startsWith('/') ? '' : '/'}${url}`)
     } else {
       setFullUrl(url)
