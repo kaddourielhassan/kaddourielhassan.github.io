@@ -14,6 +14,7 @@ export default function Accueil() {
 
   const [isCreating, setIsCreating] = useState(false)
   const [newName, setNewName] = useState('')
+  const [newNameAr, setNewNameAr] = useState('')
   const [selectedAvatar, setSelectedAvatar] = useState(0)
   const [newGoal, setNewGoal] = useState(200)
   const [difficulty, setDifficulty] = useState('normal')
@@ -26,8 +27,9 @@ export default function Accueil() {
 
   const handleCreate = () => {
     if (!newName.trim()) return
-    const id = createProfile({ 
-      prenom: newName.trim(), 
+    const id = createProfile({
+      prenom: newName.trim(),
+      prenomAr: newNameAr.trim() || null,
       avatar: CHILD_AVATARS[selectedAvatar],
       progress: 0,
       goal: newGoal,
@@ -215,9 +217,17 @@ export default function Accueil() {
                 value={newName}
                 onChange={e => setNewName(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && handleCreate()}
-                placeholder="اسمك"
+                placeholder="اسمك (بالفرنسية)"
                 autoFocus
                 className="w-full p-3.5 rounded-xl border-2 border-slate-200 dark:border-slate-700 focus:border-brand-400 outline-none font-bold bg-white dark:bg-slate-800"
+              />
+              <input
+                type="text"
+                value={newNameAr}
+                onChange={e => setNewNameAr(e.target.value)}
+                placeholder="اسمك بالعربية (اختياري) — مثال: يَاسِين"
+                dir="rtl"
+                className="w-full p-3.5 rounded-xl border-2 border-slate-200 dark:border-slate-700 focus:border-brand-400 outline-none font-arabic text-lg bg-white dark:bg-slate-800"
               />
               {/* Objectif hebdomadaire */}
               <div>

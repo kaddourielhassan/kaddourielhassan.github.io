@@ -11,7 +11,7 @@ import { usePreloadAudios } from '../hooks/usePreloadAudios'
 import ConfettiOverlay from '../components/ui/ConfettiOverlay'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, RotateCcw, Trophy, Lock } from 'lucide-react'
-import { playSuccess, playError, playVictory, playPoints } from '../utils/soundEffects'
+import { playSuccess, playError, playVictory, playPoints, playArabicFeedback } from '../utils/soundEffects'
 import { AuditingMetrics, estimateConfidence } from '../utils/auditingMetrics'
 
 export default function DistinctionPhonemes() {
@@ -110,6 +110,7 @@ export default function DistinctionPhonemes() {
       addResult(activeProfile.id, { type: 'phonemes', correct: true, phonemeId: current.id })
       playSuccess()
       playPoints()
+      playArabicFeedback('correct')
       AuditingMetrics.track({
         module: 'phonemes', type: 'correct', component: 'DistinctionPhonemes',
         profileId: activeProfile.id, profileName: activeProfile.prenom,
@@ -118,6 +119,7 @@ export default function DistinctionPhonemes() {
     } else {
       addResult(activeProfile.id, { type: 'phonemes', correct: false, phonemeId: current.id })
       playError()
+      playArabicFeedback('retry')
       AuditingMetrics.track({
         module: 'phonemes', type: 'error', component: 'DistinctionPhonemes',
         profileId: activeProfile.id, profileName: activeProfile.prenom,
@@ -213,11 +215,9 @@ export default function DistinctionPhonemes() {
         >
           <div className="text-4xl mb-4">{current.emoji}</div>
           <h2 className="text-xl font-bold text-slate-700 dark:text-slate-200 mb-1">أي صوت تسمع؟</h2>
-          <p className="text-sm text-slate-400 font-medium mb-2">{current.lettre1.nom} ({current.lettre1.type}) vs {current.lettre2.nom} ({current.lettre2.type})</p>
-          <p className="font-arabic text-lg text-brand-600 mb-6" dir="rtl">أَيُّ صَوْتٍ تَسْمَعُ؟</p>
-
-          <p className="text-sm text-slate-500 font-medium mb-4" dir="rtl">
-            استمع بعناية ثم اختر الحرف المطابق للصوت
+          <p className="font-arabic text-lg text-brand-600 mb-1" dir="rtl">أَيُّ صَوْتٍ تَسْمَعُ؟</p>
+          <p className="text-sm text-slate-400 font-bold mb-6" dir="rtl">
+            {current.lettre1.nom} أَمْ {current.lettre2.nom}؟
           </p>
 
           <div className="grid grid-cols-2 gap-4">
@@ -241,9 +241,9 @@ export default function DistinctionPhonemes() {
                   disabled={selected !== null}
                   className={`p-8 rounded-3xl border-2 shadow-md transition-all duration-300 ${cls}`}
                 >
-                  <span className="font-arabic text-5xl block mb-2 text-brand-700">{data.caractere}</span>
-                  <span className="text-sm font-bold text-slate-500">{data.nom}</span>
-                  <span className="block text-xs text-slate-400 mt-1">{data.type}</span>
+                  <span className="font-arabic text-6xl block mb-3 text-brand-700">{data.caractere}</span>
+                  <span className="text-sm font-bold text-slate-500" dir="rtl">{data.nom}</span>
+                  <span className="block text-[11px] font-medium text-slate-400 mt-1">{data.typeFr}</span>
                 </button>
               )
             })}
@@ -252,13 +252,17 @@ export default function DistinctionPhonemes() {
           {selected !== null && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
               className={`mt-6 p-3 rounded-xl font-bold text-sm ${isCorrect ? 'bg-emerald-50 text-emerald-600' : 'bg-coral-50 text-coral-600'}`}
+              dir="rtl"
             >
-              {isCorrect ? '✅ مُمْتَاز!' : `❌ الإجابة: ${target.nom} (${target.caractere})`}
+              {isCorrect
+                ? `✅ مُمْتَاز! الصواب: ${target.nom} (${target.caractere})`
+                : `❌ الإجابة الصحيحة: ${target.nom} (${target.caractere})`}
             </motion.div>
           )}
 
-          <div className="mt-4 bg-slate-50 dark:bg-slate-900 p-3 rounded-xl">
-            <p className="text-xs text-slate-400 font-medium">💡 {current.astuce}</p>
+          <div className="mt-4 bg-slate-50 dark:bg-slate-900 p-3 rounded-xl text-right" dir="rtl">
+            <p className="text-xs text-slate-500 font-bold mb-1">💡 {current.astuce}</p>
+            <p className="text-[11px] text-slate-400 font-medium" dir="ltr">{current.astuceFr}</p>
           </div>
         </motion.div>
       </AnimatePresence>

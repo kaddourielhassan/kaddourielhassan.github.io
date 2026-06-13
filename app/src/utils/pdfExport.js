@@ -3,6 +3,251 @@ import 'jspdf-autotable'
 
 const VALIDATION_THRESHOLD = 0.6 // 60%
 
+// ──────────────────────────────────────────────────────────────
+// ATTESTATION DE SUIVI PÉDAGOGIQUE
+// Document officiel : pseudo élève, % par module, signatures
+// ──────────────────────────────────────────────────────────────
+export const generateAttestation = (student, stats) => {
+  const doc = new jsPDF()
+  const w   = doc.internal.pageSize.getWidth()
+  const h   = doc.internal.pageSize.getHeight()
+  const date = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' })
+
+  // ── Cadre officiel ──
+  doc.setDrawColor(13, 148, 136)
+  doc.setLineWidth(2)
+  doc.rect(6, 6, w - 12, h - 12)
+  doc.setLineWidth(0.4)
+  doc.setDrawColor(245, 158, 11)
+  doc.rect(9, 9, w - 18, h - 18)
+
+  // ── En-tête ──
+  doc.setFillColor(13, 148, 136)
+  doc.rect(6, 6, w - 12, 44, 'F')
+  doc.setFillColor(245, 158, 11)
+  doc.rect(6, 50, w - 12, 2.5, 'F')
+
+  doc.setTextColor(255, 255, 255)
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(9)
+  doc.text('PROGRAMME HURÛFÎ — APPRENTISSAGE DE L\'ARABE — ANNÉE 1', w / 2, 20, { align: 'center' })
+  doc.setFontSize(20)
+  doc.text('ATTESTATION DE SUIVI PÉDAGOGIQUE', w / 2, 38, { align: 'center' })
+
+  // ── Infos élève ──
+  let y = 62
+  doc.setFillColor(248, 250, 252)
+  doc.roundedRect(14, y - 5, w - 28, 34, 3, 3, 'F')
+  doc.setDrawColor(226, 232, 240)
+  doc.setLineWidth(0.3)
+  doc.roundedRect(14, y - 5, w - 28, 34, 3, 3, 'S')
+
+  // Ligne 1 : pseudo + date
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(9)
+  doc.setTextColor(100, 116, 139)
+  doc.text('Pseudo de l\'élève :', 20, y + 5)
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(13)
+  doc.setTextColor(13, 148, 136)
+  doc.text(student.prenom.toUpperCase(), 68, y + 5)
+
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(9)
+  doc.setTextColor(100, 116, 139)
+  doc.text('Date :', w - 75, y + 5)
+  doc.setFont('helvetica', 'normal')
+  doc.setFontSize(9)
+  doc.setTextColor(15, 23, 42)
+  doc.text(date, w - 60, y + 5)
+
+  // Ligne 2 : niveau + points
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(9)
+  doc.setTextColor(100, 116, 139)
+  doc.text('Niveau atteint :', 20, y + 18)
+  doc.setFont('helvetica', 'normal')
+  doc.setTextColor(15, 23, 42)
+  doc.text(`Niveau ${student.niveau}`, 68, y + 18)
+
+  doc.setFont('helvetica', 'bold')
+  doc.setTextColor(100, 116, 139)
+  doc.text('Points étoiles :', w - 75, y + 18)
+  doc.setFont('helvetica', 'bold')
+  doc.setTextColor(245, 158, 11)
+  doc.text(`${student.pointsTotal} ⭐`, w - 45, y + 18)
+
+  // ── Tableau des modules ──
+  y += 40
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(11)
+  doc.setTextColor(15, 23, 42)
+  doc.text('RÉSULTATS PAR MODULE', 14, y)
+  doc.setDrawColor(13, 148, 136)
+  doc.setLineWidth(1)
+  doc.line(14, y + 2, 80, y + 2)
+
+  const modules = [
+    { name: 'Écoute & Reconnaissance', nameAr: 'الاستماع',  value: stats.ecoute?.correct     || 0, max: 20 },
+    { name: 'Jeu de Mémoire',          nameAr: 'الذاكرة',   value: stats.memory?.completed   || 0, max: 6  },
+    { name: 'Distinction Phonèmes',    nameAr: 'الأصوات',   value: stats.phonemes?.correct   || 0, max: 6  },
+    { name: 'Traçage des Lettres',     nameAr: 'التتبع',    value: stats.tracage?.completed  || 0, max: 12 },
+    { name: 'Syllabes',               nameAr: 'المقاطع',   value: stats.syllabes?.correct   || 0, max: 36 },
+    { name: 'Vocabulaire',            nameAr: 'الكلمات',   value: stats.flashcards?.vus     || 0, max: 72 },
+    { name: 'Conversation',           nameAr: 'المحادثة',  value: stats.conversation?.correct|| 0, max: 24 },
+  ]
+
+  const tableBody = modules.map(m => {
+    const pct    = m.max > 0 ? Math.min(100, Math.round((m.value / m.max) * 100)) : 0
+    const status = m.value === 0 ? 'Non travaillé' : pct >= 60 ? 'Validé ✓' : 'En cours'
+    return [m.name, m.nameAr, `${m.value} / ${m.max}`, `${pct} %`, status]
+  })
+
+  doc.autoTable({
+    startY: y + 6,
+    head: [['Module', 'بالعربية', 'Exercices réalisés', '% Réussite', 'Statut']],
+    body: tableBody,
+    headStyles: {
+      fillColor: [15, 23, 42], textColor: [255, 255, 255],
+      fontSize: 9, fontStyle: 'bold', cellPadding: 5,
+    },
+    bodyStyles: { fontSize: 9, cellPadding: 5 },
+    alternateRowStyles: { fillColor: [248, 250, 252] },
+    columnStyles: {
+      0: { fontStyle: 'bold' },
+      1: { halign: 'center' },
+      2: { halign: 'center' },
+      3: { halign: 'center', fontStyle: 'bold' },
+      4: { halign: 'center', fontStyle: 'bold' },
+    },
+    didParseCell: (data) => {
+      if (data.section !== 'body') return
+      if (data.column.index === 4) {
+        const v = data.cell.raw
+        if (v.includes('Validé'))       data.cell.styles.textColor = [16, 185, 129]
+        else if (v === 'En cours')      data.cell.styles.textColor = [245, 158, 11]
+        else                            data.cell.styles.textColor = [148, 163, 184]
+      }
+      if (data.column.index === 3) {
+        const p = parseInt(data.cell.raw)
+        if (p >= 60)      data.cell.styles.textColor = [16, 185, 129]
+        else if (p > 0)   data.cell.styles.textColor = [245, 158, 11]
+        else              data.cell.styles.textColor = [148, 163, 184]
+      }
+    },
+    margin: { left: 14, right: 14 },
+  })
+
+  y = doc.lastAutoTable.finalY + 8
+
+  // ── Modules non travaillés ──
+  const notDone = modules.filter(m => m.value === 0)
+  if (notDone.length > 0) {
+    const boxH = 8 + notDone.length * 6
+    doc.setFillColor(254, 252, 232)
+    doc.roundedRect(14, y, w - 28, boxH, 2, 2, 'F')
+    doc.setDrawColor(253, 224, 71)
+    doc.setLineWidth(0.4)
+    doc.roundedRect(14, y, w - 28, boxH, 2, 2, 'S')
+
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(8.5)
+    doc.setTextColor(146, 100, 16)
+    doc.text('Modules non encore travaillés :', 19, y + 7)
+    doc.setFont('helvetica', 'normal')
+    doc.setTextColor(100, 116, 139)
+    notDone.forEach((m, i) => {
+      doc.text(`• ${m.name}  (${m.nameAr})`, 24, y + 13 + i * 6)
+    })
+    y += boxH + 8
+  } else {
+    doc.setFillColor(236, 253, 245)
+    doc.roundedRect(14, y, w - 28, 12, 2, 2, 'F')
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(9)
+    doc.setTextColor(16, 185, 129)
+    doc.text('✓ Tous les modules ont été travaillés.', w / 2, y + 8, { align: 'center' })
+    y += 18
+  }
+
+  // ── Appréciation ──
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(10)
+  doc.setTextColor(15, 23, 42)
+  doc.text('Appréciation générale de l\'enseignant(e) :', 14, y)
+  doc.setDrawColor(200, 200, 200)
+  doc.setLineWidth(0.3)
+  doc.line(14, y + 8,  w - 14, y + 8)
+  doc.line(14, y + 17, w - 14, y + 17)
+  y += 24
+
+  // ── Zone signatures ──
+  const sigY = h - 64
+
+  // Cadre enseignant (gauche)
+  doc.setFillColor(248, 250, 252)
+  doc.roundedRect(14, sigY, 82, 50, 3, 3, 'F')
+  doc.setDrawColor(226, 232, 240)
+  doc.setLineWidth(0.4)
+  doc.roundedRect(14, sigY, 82, 50, 3, 3, 'S')
+
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(8)
+  doc.setTextColor(71, 85, 105)
+  doc.text('Nom de l\'enseignant(e) :', 19, sigY + 9)
+  doc.setDrawColor(190, 190, 190)
+  doc.setLineWidth(0.3)
+  doc.line(19, sigY + 16, 90, sigY + 16)
+
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(8)
+  doc.text('Signature de l\'enseignant(e) :', 19, sigY + 27)
+  doc.line(19, sigY + 46, 90, sigY + 46)
+
+  // Cadre parents (droite)
+  doc.setFillColor(248, 250, 252)
+  doc.roundedRect(w - 96, sigY, 82, 50, 3, 3, 'F')
+  doc.setDrawColor(226, 232, 240)
+  doc.setLineWidth(0.4)
+  doc.roundedRect(w - 96, sigY, 82, 50, 3, 3, 'S')
+
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(8)
+  doc.setTextColor(71, 85, 105)
+  doc.text('Signature des parents :', w - 91, sigY + 9)
+  doc.line(w - 91, sigY + 46, w - 20, sigY + 46)
+
+  // Tampon global centré
+  const validated = modules.filter(m => m.value > 0 && Math.min(100, Math.round((m.value / m.max) * 100)) >= 60).length
+  const attempted = modules.filter(m => m.value > 0).length
+  if (attempted > 0) {
+    const stampX = w / 2
+    const stampY = sigY + 25
+    doc.setFillColor(attempted > 0 && validated === attempted ? 16 : 245,
+                     attempted > 0 && validated === attempted ? 185 : 158,
+                     attempted > 0 && validated === attempted ? 129 : 11)
+    doc.circle(stampX, stampY, 18, 'F')
+    doc.setTextColor(255, 255, 255)
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(10)
+    doc.text(`${validated}/${attempted}`, stampX, stampY - 2, { align: 'center' })
+    doc.setFontSize(6)
+    doc.text('modules', stampX, stampY + 5, { align: 'center' })
+    doc.text('validés', stampX, stampY + 11, { align: 'center' })
+  }
+
+  // ── Pied de page ──
+  doc.setTextColor(148, 163, 184)
+  doc.setFont('helvetica', 'normal')
+  doc.setFontSize(7)
+  doc.text(
+    `Document généré par HURÛFÎ Pro  |  ${date}  |  Document officiel à conserver`,
+    w / 2, h - 11, { align: 'center' }
+  )
+
+  doc.save(`Attestation_${student.prenom}_${new Date().toISOString().slice(0, 10)}.pdf`)
+}
+
 const MODULE_CONFIG = [
   { key: 'ecoute',   name: 'Ecoute & Reconnaissance', max: 20, valueKey: 'correct',   emoji: 'Ecoute' },
   { key: 'memory',   name: 'Jeu de Memoire',          max: 10, valueKey: 'completed', emoji: 'Memoire' },

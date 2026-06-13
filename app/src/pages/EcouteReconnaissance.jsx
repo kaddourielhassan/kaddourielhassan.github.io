@@ -11,8 +11,10 @@ import { usePreloadAudios } from '../hooks/usePreloadAudios'
 import ConfettiOverlay from '../components/ui/ConfettiOverlay'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, RotateCcw, Trophy, Lock, Sparkles } from 'lucide-react'
-import { playSuccess, playError, playVictory, playPoints } from '../utils/soundEffects'
+import { playSuccess, playError, playVictory, playPoints, playArabicFeedback } from '../utils/soundEffects'
 import { AuditingMetrics, estimateConfidence, calculateDifficulty } from '../utils/auditingMetrics'
+import MicButton from '../components/ui/MicButton'
+import { arabicMatches } from '../services/googleSttService'
 
 function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5) }
 
@@ -126,6 +128,7 @@ export default function EcouteReconnaissance() {
       addResult(activeProfile.id, { type: 'ecoute', correct: true, lettreId: current.correct.id })
       playSuccess()
       playPoints()
+      playArabicFeedback('correct')
       AuditingMetrics.track({
         module: 'ecoute', type: 'correct', component: 'EcouteReconnaissance',
         profileId: activeProfile.id, profileName: activeProfile.prenom,
@@ -134,6 +137,7 @@ export default function EcouteReconnaissance() {
     } else {
       addResult(activeProfile.id, { type: 'ecoute', correct: false, lettreId: current.correct.id })
       playError()
+      playArabicFeedback('retry')
       AuditingMetrics.track({
         module: 'ecoute', type: 'error', component: 'EcouteReconnaissance',
         profileId: activeProfile.id, profileName: activeProfile.prenom,
@@ -152,6 +156,17 @@ export default function EcouteReconnaissance() {
         setIsCorrect(null)
       }
     }, 1500)
+  }
+
+  // Prononciation vocale — tente de faire correspondre la transcription à une option
+  const handleVoiceResult = (transcript) => {
+    if (selected !== null || !transcript) return
+    const match = current.options.find(opt =>
+      arabicMatches(transcript, opt.lettre) ||
+      arabicMatches(transcript, opt.nom || '') ||
+      arabicMatches(transcript, opt.translit || '')
+    )
+    if (match) handleAnswer(match)
   }
 
   const restart = () => {
@@ -288,6 +303,14 @@ export default function EcouteReconnaissance() {
               )
             })}
           </div>
+
+          {/* Mic — alternative vocale */}
+          {selected === null && (
+            <div className="mt-5 flex flex-col items-center gap-1">
+              <p className="text-xs text-slate-400 font-bold">— أو تَحَدَّثْ —</p>
+              <MicButton onResult={handleVoiceResult} disabled={selected !== null} />
+            </div>
+          )}
 
           {/* Feedback */}
           {selected !== null && (

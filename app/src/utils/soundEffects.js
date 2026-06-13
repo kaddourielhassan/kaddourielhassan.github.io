@@ -15,6 +15,33 @@ import { useAppStore } from '../store/useAppStore'
 
 let audioCtx = null
 
+// ──────────────────────────────────────────────────────
+// Feedback vocal arabe (fichiers MP3 générés via ElevenLabs)
+// ──────────────────────────────────────────────────────
+const FEEDBACK_AUDIO = {
+  correct: 'audio/feedback/ahsanta.mp3',
+  excellent: 'audio/feedback/mumtaz.mp3',
+  retry: 'audio/feedback/hawil.mp3',
+}
+
+let feedbackAudio = null
+
+export function playArabicFeedback(type = 'correct') {
+  if (!useAppStore.getState().soundEnabled) return
+  const rel = FEEDBACK_AUDIO[type]
+  if (!rel) return
+  try {
+    const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '')
+    const url  = `${base}/${rel}`
+    if (feedbackAudio) { feedbackAudio.pause(); feedbackAudio.currentTime = 0 }
+    feedbackAudio = new Audio(url)
+    feedbackAudio.volume = 0.85
+    feedbackAudio.play().catch(() => {})
+  } catch (e) {
+    console.warn('[SFX] Arabic feedback failed:', e)
+  }
+}
+
 function getContext() {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)()

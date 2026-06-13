@@ -98,8 +98,8 @@ export function speakTTS(text, onStart, onEnd, onError) {
     utterance.lang = 'ar-SA'
   }
 
-  utterance.rate = 0.75
-  utterance.pitch = 1.1
+  utterance.rate = 1.0
+  utterance.pitch = 1.0
 
   if (onStart) utterance.onstart = onStart
   if (onEnd) utterance.onend = onEnd

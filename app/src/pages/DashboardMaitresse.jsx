@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom'
 import { useProfileStore, CHILD_AVATARS } from '../store/useProfileStore'
 import { useGameStore } from '../store/useGameStore'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  ArrowLeft, Lock, Download, Trash2, Star, BarChart3, 
-  Volume2, Play, Users, CheckCircle2, AlertCircle, 
-  Settings, ChevronRight, Search, FileText, Menu, X, Loader2, Trophy, Activity
+import {
+  ArrowLeft, Lock, Download, Trash2, Star, BarChart3,
+  Volume2, Play, Users, CheckCircle2, AlertCircle,
+  Settings, ChevronRight, Search, FileText, Menu, X, Loader2, Trophy, Activity, ClipboardCheck
 } from 'lucide-react'
 import { alphabet } from '../data/alphabet'
 import { phonemes } from '../data/phonemes'
 import { conversations } from '../data/conversations'
 import { categories } from '../data/vocabulaire'
 import { AuditingMetrics } from '../utils/auditingMetrics'
-import { generateDiploma, generateClassReport, generateStudentReport } from '../utils/pdfExport'
+import { generateDiploma, generateClassReport, generateStudentReport, generateAttestation } from '../utils/pdfExport'
 import { changePin, getAttemptsInfo } from '../utils/pinSecurity'
 import TeacherAuth from '../components/dashboard/TeacherAuth'
 
@@ -233,7 +233,7 @@ export default function DashboardMaitresse() {
                               <div>
                                 <div className="flex items-center gap-3">
                                   <h3 className="text-2xl font-black text-slate-800 dark:text-slate-100 tracking-tight">{p.prenom}</h3>
-                                  <button 
+                                  <button
                                     onClick={() => generateStudentReport(p, stats, AuditingMetrics.getProfileSummary(p.id))}
                                     title="Exporter le rapport de progression"
                                     className="p-2 rounded-lg bg-amber-50 text-amber-600 hover:bg-amber-600 hover:text-white transition-all shadow-sm flex items-center gap-1.5"
@@ -241,7 +241,7 @@ export default function DashboardMaitresse() {
                                     <FileText className="h-3.5 w-3.5" />
                                     <span className="text-[10px] font-black uppercase">تقرير</span>
                                   </button>
-                                  <button 
+                                  <button
                                     onClick={() => generateDiploma(p, stats)}
                                     title="Générer un diplôme"
                                     className="p-2 rounded-lg bg-brand-50 text-brand-600 hover:bg-brand-600 hover:text-white transition-all shadow-sm flex items-center gap-1.5"
@@ -249,6 +249,22 @@ export default function DashboardMaitresse() {
                                     <Trophy className="h-3.5 w-3.5" />
                                     <span className="text-[10px] font-black uppercase">شهادة</span>
                                   </button>
+                                  <button
+                                    onClick={() => generateAttestation(p, stats)}
+                                    title="Attestation de suivi pédagogique (% par module + signatures)"
+                                    className="p-2 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all shadow-sm flex items-center gap-1.5"
+                                  >
+                                    <ClipboardCheck className="h-3.5 w-3.5" />
+                                    <span className="text-[10px] font-black uppercase">وثيقة</span>
+                                  </button>
+                                  <Link
+                                    to={`/evaluation?teacherMode=true&profileId=${p.id}`}
+                                    title="Lancer une évaluation pour cet élève (sans points)"
+                                    className="p-2 rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all shadow-sm flex items-center gap-1.5"
+                                  >
+                                    <ClipboardCheck className="h-3.5 w-3.5" />
+                                    <span className="text-[10px] font-black uppercase">تقييم</span>
+                                  </Link>
                                 </div>
                                 <div className="flex items-center gap-2 mt-1">
                                   <span className="px-2 py-0.5 rounded-lg bg-gold-500 text-white font-black text-[9px] uppercase shadow-sm">المستوى {p.niveau}</span>

@@ -12,6 +12,9 @@ import DashboardEnfant from './pages/DashboardEnfant'
 import BadgesPage from './pages/BadgesPage'
 import DashboardMaitresse from './pages/DashboardMaitresse'
 import Conversation from './pages/Conversation'
+import Syllabes from './pages/Syllabes'
+import ChansonAlphabet from './pages/ChansonAlphabet'
+import EvaluationNiveau from './pages/EvaluationNiveau'
 import { useAppStore } from './store/useAppStore'
 
 function App() {
@@ -39,6 +42,9 @@ function App() {
           <Route path="dashboard-enfant" element={<DashboardEnfant />} />
           <Route path="badges" element={<BadgesPage />} />
           <Route path="maitresse" element={<DashboardMaitresse />} />
+          <Route path="syllabes" element={<Syllabes />} />
+          <Route path="chanson" element={<ChansonAlphabet />} />
+          <Route path="evaluation" element={<EvaluationNiveau />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
